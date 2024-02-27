@@ -7,7 +7,7 @@ public class Event {
 		this.time = time;
 	}
 	
-	public void execute(EventQueue eventQueue, State state) {
+	public void execute(State state, EventQueue eventQueue) {
 		state.time = this.time;
 	}
 }
