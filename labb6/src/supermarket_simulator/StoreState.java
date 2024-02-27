@@ -1,14 +1,20 @@
 package supermarket_simulator;
 import generic_simulator.State;
+import supermarket_simulator.time.*;
 
-class StoreState extends State {
+public class StoreState extends State {
 	public boolean isOpen;
 	
-	final public int cashierCount;
-	final public int maxCustomerCount;
+	public final int cashierCount;
+	public final int maxCustomerCount;
 	
-	public StoreState(int n, int m, double lambda, double kMin, double kMax, double pMin, double pMax, int f) {
+	public final ArivalTimeProvider arivalTime;
+	
+	public StoreState(int n, int m, double lambda, 
+			double kMin, double kMax, double pMin, 
+			double pMax, long f) {
 		cashierCount = n;
 		maxCustomerCount = m;
+		arivalTime = new ArivalTimeProvider(this, lambda, f);
 	}
 }
