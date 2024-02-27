@@ -11,5 +11,6 @@ public class GUI extends JFrame{
 	       JButton button = new JButton("Press");
 	       frame.getContentPane().add(button); // Adds Button to content pane of frame
 	       frame.setVisible(true);
+	       //blah
 	    }
 }
