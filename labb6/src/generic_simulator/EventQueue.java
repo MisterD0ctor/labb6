@@ -6,7 +6,7 @@ public class EventQueue {
 		// TODO: implement enqueue
 	}
 	
-	public Event dequeue() {
+	Event dequeue() {
 		// TODO: implement dequeue
 		return null;
 	}
