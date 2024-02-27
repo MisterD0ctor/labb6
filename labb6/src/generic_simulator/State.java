@@ -4,11 +4,11 @@ import java.util.Observable;
 
 @SuppressWarnings("deprecation")
 public class State extends Observable {
- 	public float time;
+ 	public double time;
 	public boolean running; // The stop flag
 	
 	public State() {
-		time = 0f;
+		time = 0;
 		running = true;
 	}
 }

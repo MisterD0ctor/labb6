@@ -1,9 +1,9 @@
 package generic_simulator;
 
 public class Event {
-	public final float time;
+	public final double time;
 	
-	public Event(float time) {
+	public Event(double time) {
 		this.time = time;
 	}
 	
