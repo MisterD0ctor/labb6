@@ -1,10 +1,10 @@
-package supermarket_simulator;
+package supermarket_simulator.events;
 import generic_simulator.Event;
 import generic_simulator.EventQueue;
 import generic_simulator.State;
 
 class ArivalEvent extends Event {
-	public ArivalEvent(float time) {
+	public ArivalEvent(double time) {
 		super(time);
 	}
 	
