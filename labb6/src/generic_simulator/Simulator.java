@@ -14,7 +14,7 @@ public class Simulator {
 			Event event = eventQueue.dequeue();
 			
 			if (!event.equals(null)) {
-				event.execute(eventQueue, state);				
+				event.execute(state, eventQueue);				
 			}
 		}
 	}
