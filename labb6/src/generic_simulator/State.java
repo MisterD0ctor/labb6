@@ -8,6 +8,7 @@ public class State extends Observable {
 	public boolean running; // The stop flag
 	
 	public State() {
+		time = 0f;
 		running = true;
 	}
 }
