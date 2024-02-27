@@ -1,17 +1,19 @@
-package supermarket_simulator;
+package supermarket_simulator.events;
 import generic_simulator.Event;
 import generic_simulator.EventQueue;
 import generic_simulator.State;
+import supermarket_simulator.StoreState;
 
 class StartEvent extends Event {
 	public StartEvent() {
-		super(0f);
+		super(0);
 	}
 	
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		eventQueue.enqueue(null);
+		StoreState s = (StoreState)state;
+		eventQueue.enqueue(new ArivalEvent(s.arivalTime.next()));
 	}
 }
