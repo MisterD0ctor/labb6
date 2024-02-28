@@ -4,6 +4,7 @@ import generic_simulator.EventQueue;
 import generic_simulator.State;
 
 class ArivalEvent extends Event {
+	
 	public ArivalEvent(double time) {
 		super(time);
 	}
