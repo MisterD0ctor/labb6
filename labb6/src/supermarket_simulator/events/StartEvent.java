@@ -4,7 +4,7 @@ import generic_simulator.EventQueue;
 import generic_simulator.State;
 import supermarket_simulator.StoreState;
 
-class StartEvent extends Event {
+public class StartEvent extends Event {
 	public StartEvent() {
 		super(0);
 	}
