@@ -36,7 +36,7 @@ public class StoreState extends State {
 		payTime = new UniformTimeProvider(this, pMin, pMax, f);
 		
 		isClosed = false;
-		availableCheckoutsCount = 0;
+		availableCheckoutsCount = n;
 		customerCount = 0;
 		payCount = 0;
 		missedCustomerCount = 0;
