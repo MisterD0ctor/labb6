@@ -19,26 +19,21 @@ public class PickEvent extends Event {
     public void execute(State state, EventQueue eventQueue) {
         super.execute(state, eventQueue);
         
-        StoreState storeState = (StoreState) state;
-        
-        
+        StoreState store = (StoreState) state;
         
         // Kontrollera om det finns lediga kassor
-        if(storeState.availableCheckoutsCount > 0) {
+        if(store.availableCheckoutsCount > 0) {
             //Minskar antalet lediga kassor eftersom, en till är upptagen nu
-            storeState.availableCheckoutsCount -= 1;
+            store.availableCheckoutsCount -= 1;
             
-            
-            double payTime = this.time + storeState.payTimeProvider.next(); 
-            Event payEvent = new PayEvent(payTime, customer);
+            Event payEvent = new PayEvent(store.payTimeProvider.next(), customer);
             eventQueue.enqueue(payEvent);
         } else { 
 
             // Alla kassor är upptagna, ställ kunden i kö
-            storeState.checkoutQueue.offer(customer);
-            storeState.totalQueueTime -= time;
+            store.checkoutQueue.offer(customer);
+            store.totalQueueTime -= time;
         }
     }
-	
 }
 //Ludvig tar denna
