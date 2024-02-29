@@ -8,6 +8,6 @@ class StoreView extends View {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-
+		System.out.println(arg);
 	}
 }
