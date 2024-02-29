@@ -32,12 +32,13 @@ public class PickEvent extends Event {
             double payTime = this.getTime() + storeState.payTime.getNext();
             Event payEvent = new PayEvent(payTime, customer);
             eventQueue.add(payEvent);
-        } else {*/
-            
+        } else {*/ }
+
             // Alla kassor är upptagna, ställ kunden i kö
-            storeState.checkoutQueue.add(customer);
+            storeState.checkoutQueue.offer(customer);
+            storeState.totalQueueTime -= time;
         }
-    }
+    
 	
 }
 //Ludvig tar denna
