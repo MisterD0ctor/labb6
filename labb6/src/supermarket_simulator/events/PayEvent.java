@@ -25,12 +25,11 @@ public class PayEvent extends Event {
 		
 		if (store.checkoutQueue.isEmpty()) {
 			store.availableCheckoutsCount++;
-			return;
+		} else {
+			Customer c = store.checkoutQueue.pop();
+			store.totalQueueTime += time; 
+			
+			eventQueue.enqueue(new PayEvent(store.payTimeProvider.next(), c));
 		}
-		
-		Customer c = store.checkoutQueue.pop();
-		store.totalQueueTime += time; 
-		
-		eventQueue.enqueue(new PayEvent(store.payTimeProvider.next(), c));
 	}
 }
