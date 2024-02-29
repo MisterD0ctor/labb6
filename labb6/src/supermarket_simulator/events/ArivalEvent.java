@@ -7,27 +7,28 @@ import supermarket_simulator.Customer;
 
 class ArivalEvent extends Event {
 	
-	public ArivalEvent(double time) {
+	public Customer customer;
+	
+	public ArivalEvent(double time, Customer customer) {
 		super(time);
+		this.customer = customer;
 	}
 	
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		StoreState s = (StoreState)state;
+		StoreState store = (StoreState)state;
 		
-		if (s.isClosed) {
+		eventQueue.enqueue(new PickEvent(store.pickTimeProvider.next(), customer));
+		
+		if (store.isClosed) {
 			return;
-		} else if (s.customerCount >= s.maxCustomerCount) {
-			s.missedCustomerCount++;
+		} else if (store.customerCount >= store.maxCustomerCount) {
+			store.missedCustomerCount++;
 			return;
 		}
 		
-		Customer c = s.customerFactory.getCustomer();
-		
-		eventQueue.enqueue(new PickEvent(s.pickTimeProvider.next(), c));
-		
-		eventQueue.enqueue(new ArivalEvent(s.arivalTimeProvider.next()));		
+		eventQueue.enqueue(new ArivalEvent(store.arivalTimeProvider.next(), customer));		
 	}
 }
