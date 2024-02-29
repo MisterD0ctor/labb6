@@ -28,17 +28,17 @@ public class PickEvent extends Event {
             //Minskar antalet lediga kassor eftersom, en till är upptagen nu
             storeState.availableCheckoutsCount -= 1;
             
-           /* TEST EXEMPEL
-            double payTime = this.getTime() + storeState.payTime.getNext();
+            
+            double payTime = this.time + storeState.payTimeProvider.next(); 
             Event payEvent = new PayEvent(payTime, customer);
-            eventQueue.add(payEvent);
-        } else {*/ }
+            eventQueue.enqueue(payEvent);
+        } else { 
 
             // Alla kassor är upptagna, ställ kunden i kö
             storeState.checkoutQueue.offer(customer);
             storeState.totalQueueTime -= time;
         }
-    
+    }
 	
 }
 //Ludvig tar denna
