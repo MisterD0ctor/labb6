@@ -14,7 +14,7 @@ public class CloseEvent extends Event {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		StoreState s = (StoreState)state;
-		s.isClosed = true;
+		StoreState store = (StoreState)state;
+		store.isClosed = true;
 	}
 }
