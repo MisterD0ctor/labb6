@@ -23,13 +23,13 @@ public class PayEvent extends Event {
 		store.customerCount--;
 		store.payCount++;
 		
-		
 		if (store.checkoutQueue.isEmpty()) {
 			store.availableCheckoutsCount++;
 			return;
 		}
 		
 		Customer c = store.checkoutQueue.pop();
+		store.totalQueueTime += time; 
 		
 		eventQueue.enqueue(new PayEvent(store.payTimeProvider.next(), c));
 	}
