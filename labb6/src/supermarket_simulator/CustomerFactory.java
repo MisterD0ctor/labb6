@@ -7,7 +7,7 @@ public class CustomerFactory {
 		customerCount = 0f;
 	}
 	
-	public Customer CreateCustomer() {
+	public Customer getCustomer() {
 		return new Customer(customerCount++);
 	}
 }
