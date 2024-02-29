@@ -9,11 +9,13 @@ public class StartEvent extends Event {
 		super(0);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
 		StoreState store = (StoreState)state;
+		store.notifyObservers(this);
 		
 		eventQueue.enqueue(new ArivalEvent(
 				store.arivalTimeProvider.next(), 

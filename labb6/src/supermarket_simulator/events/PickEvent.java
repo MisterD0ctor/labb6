@@ -20,6 +20,7 @@ public class PickEvent extends Event {
         super.execute(state, eventQueue);
         
         StoreState store = (StoreState) state;
+        store.notifyObservers(this);
         
         // Kontrollera om det finns lediga kassor
         if(store.availableCheckoutsCount > 0) {

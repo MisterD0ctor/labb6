@@ -19,6 +19,7 @@ public class PayEvent extends Event {
 		super.execute(state, eventQueue);
 		
 		StoreState store = (StoreState)state;
+		store.notifyObservers(this);
 		
 		store.customerCount--;
 		store.payCount++;

@@ -19,6 +19,7 @@ class ArivalEvent extends Event {
 		super.execute(state, eventQueue);
 		
 		StoreState store = (StoreState)state;
+		store.notifyObservers(this);
 		
 		eventQueue.enqueue(new PickEvent(
 				store.pickTimeProvider.next(), 
