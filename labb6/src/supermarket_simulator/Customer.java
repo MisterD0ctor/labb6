@@ -1,6 +1,6 @@
 package supermarket_simulator;
 
-class Customer {
+public class Customer {
 	public final float id;
 	
 	public Customer(float id) {
