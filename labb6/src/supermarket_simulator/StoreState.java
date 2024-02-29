@@ -21,9 +21,9 @@ public class StoreState extends State {
 	public final CustomerFactory customerFactory;
 	public ArrayDeque<Customer> checkoutQueue;
 	
-	public final ExponentialTimeProvider arivalTime;
-	public final UniformTimeProvider pickTime;
-	public final UniformTimeProvider payTime;
+	public final ExponentialTimeProvider arivalTimeProvider;
+	public final UniformTimeProvider pickTimeProvider;
+	public final UniformTimeProvider payTimeProvider;
 	
 	public StoreState(int n, int m, double lambda, 
 			double kMin, double kMax, double pMin, 
@@ -31,9 +31,9 @@ public class StoreState extends State {
 		
 		checkoutsCount = n;
 		maxCustomerCount = m;
-		arivalTime = new ExponentialTimeProvider(this, lambda, f);
-		pickTime = new UniformTimeProvider(this, kMin, kMax, f);
-		payTime = new UniformTimeProvider(this, pMin, pMax, f);
+		arivalTimeProvider = new ExponentialTimeProvider(this, lambda, f);
+		pickTimeProvider = new UniformTimeProvider(this, kMin, kMax, f);
+		payTimeProvider = new UniformTimeProvider(this, pMin, pMax, f);
 		
 		isClosed = false;
 		availableCheckoutsCount = n;

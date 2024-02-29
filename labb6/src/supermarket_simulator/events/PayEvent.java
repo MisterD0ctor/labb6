@@ -31,6 +31,6 @@ public class PayEvent extends Event {
 		
 		Customer c = store.checkoutQueue.pop();
 		
-		eventQueue.enqueue(new PayEvent(store.payTime.next(), c));
+		eventQueue.enqueue(new PayEvent(store.payTimeProvider.next(), c));
 	}
 }

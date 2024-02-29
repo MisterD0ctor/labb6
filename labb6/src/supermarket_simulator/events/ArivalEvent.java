@@ -26,8 +26,8 @@ class ArivalEvent extends Event {
 		
 		Customer c = s.customerFactory.getCustomer();
 		
-		eventQueue.enqueue(new PickEvent(s.pickTime.next(), c));
+		eventQueue.enqueue(new PickEvent(s.pickTimeProvider.next(), c));
 		
-		eventQueue.enqueue(new ArivalEvent(s.arivalTime.next()));		
+		eventQueue.enqueue(new ArivalEvent(s.arivalTimeProvider.next()));		
 	}
 }
