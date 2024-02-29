@@ -8,9 +8,16 @@ public class StoreState extends State {
 	public final int cashierCount;
 	public final int maxCustomerCount;
 	
+	public int payCount;
+	public int missedCustomerCount;
+	public double cashierInactivityTime;
+	public double totalQueueTime;
+	
 	public final ExponentialTimeProvider arivalTime;
 	public final UniformTimeProvider pickTime;
 	public final UniformTimeProvider payTime;
+	
+	
 	
 	public StoreState(int n, int m, double lambda, 
 			double kMin, double kMax, double pMin, 
