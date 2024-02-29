@@ -5,11 +5,11 @@ import generic_simulator.State;
 
 class PickEvent extends Event {
 	
-	private int customerId;
+	private int customer;
 
-	public PickEvent(double time, int customerId) {
+	public PickEvent(double time, int customer) {
 		super(time);
-		this.customerId = customerId;
+		this.customerId = customer;
 	}
 	
 	@Override
