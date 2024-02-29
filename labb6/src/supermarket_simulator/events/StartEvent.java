@@ -14,6 +14,6 @@ public class StartEvent extends Event {
 		super.execute(state, eventQueue);
 		
 		StoreState s = (StoreState)state;
-		eventQueue.enqueue(new ArivalEvent(s.arivalTime.next()));
+		eventQueue.enqueue(new ArivalEvent(s.arivalTimeProvider.next()));
 	}
 }
