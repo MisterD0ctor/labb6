@@ -2,7 +2,7 @@ package generic_simulator;
 
 public class StopEvent extends Event {
 	
-	public StopEvent(float time) {
+	public StopEvent(double time) {
 		super(time);
 	}
 	
