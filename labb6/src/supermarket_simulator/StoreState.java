@@ -1,4 +1,7 @@
 package supermarket_simulator;
+
+import java.util.ArrayDeque;
+
 import generic_simulator.State;
 import supermarket_simulator.time.*;
 
@@ -16,7 +19,7 @@ public class StoreState extends State {
 	public double totalQueueTime;
 	
 	public final CustomerFactory customerFactory;
-	public FIFO<Customer> checkoutQueue;
+	public ArrayDeque<Customer> checkoutQueue;
 	
 	public final ExponentialTimeProvider arivalTime;
 	public final UniformTimeProvider pickTime;
@@ -41,6 +44,6 @@ public class StoreState extends State {
 		totalQueueTime = 0;
 		
 		customerFactory = new CustomerFactory();
-		checkoutQueue = new FIFO<Customer>();
+		checkoutQueue = new ArrayDeque<Customer>();
 	}
 }
