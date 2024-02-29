@@ -20,7 +20,9 @@ class ArivalEvent extends Event {
 		
 		StoreState store = (StoreState)state;
 		
-		eventQueue.enqueue(new PickEvent(store.pickTimeProvider.next(), customer));
+		eventQueue.enqueue(new PickEvent(
+				store.pickTimeProvider.next(), 
+				this.customer));
 		
 		if (store.isClosed) {
 			return;
@@ -29,6 +31,8 @@ class ArivalEvent extends Event {
 			return;
 		}
 		
-		eventQueue.enqueue(new ArivalEvent(store.arivalTimeProvider.next(), customer));		
+		eventQueue.enqueue(new ArivalEvent(
+				store.arivalTimeProvider.next(), 
+				store.customerFactory.getCustomer()));		
 	}
 }

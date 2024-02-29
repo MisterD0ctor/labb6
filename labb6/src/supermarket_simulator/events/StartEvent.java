@@ -13,7 +13,10 @@ public class StartEvent extends Event {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		StoreState s = (StoreState)state;
-		eventQueue.enqueue(new ArivalEvent(s.arivalTimeProvider.next()));
+		StoreState store = (StoreState)state;
+		
+		eventQueue.enqueue(new ArivalEvent(
+				store.arivalTimeProvider.next(), 
+				store.customerFactory.getCustomer()));
 	}
 }
