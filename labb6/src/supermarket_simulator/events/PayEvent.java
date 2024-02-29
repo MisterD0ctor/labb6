@@ -2,26 +2,35 @@ package supermarket_simulator.events;
 import generic_simulator.Event;
 import generic_simulator.EventQueue;
 import generic_simulator.State;
+import supermarket_simulator.StoreState;
+import supermarket_simulator.Customer;
 
 public class PayEvent extends Event {
 	
-	public PayEvent(double time) {
+	private Customer customer;
+	
+	public PayEvent(double time, Customer customer) {
 		super(time);
+		this.customer = customer;
 	}
 	
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		/* 
-		 * När detta inträffar minskar antalet kunder i snabbköpet med 1 och vi kan anteckna att
-		 * ytterligare en kund har handlat. Samtidigt som kunden går blir en kassa ledig.
-		 * 
-		 * Om kassakön inte är tom får den kund C’ som stått längst i kö (den som i normala fall
-		 * står först) gå till den lediga kassan som därefter omedelbart åter blir upptagen. Vi
-		 * genererar sen en betalningshändelse för C’. Om kassakön istället är tom ökar vi på
-		 * antalet lediga kassor med 1.
-		 */
+		StoreState store = (StoreState)state;
 		
+		store.customerCount--;
+		store.payCount++;
+		
+		
+		if (store.checkoutQueue.isEmpty()) {
+			store.availableCheckoutsCount++;
+			return;
+		}
+		
+		Customer c = store.checkoutQueue.pop();
+		
+		eventQueue.enqueue(new PayEvent(store.payTime.next(), c));
 	}
 }
