@@ -1,6 +1,6 @@
 package supermarket_simulator;
 
-class CustomerFactory {
+public class CustomerFactory {
 	private float customerCount;
 	
 	public CustomerFactory() {
