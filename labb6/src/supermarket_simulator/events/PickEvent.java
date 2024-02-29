@@ -4,15 +4,23 @@ import generic_simulator.EventQueue;
 import generic_simulator.State;
 
 class PickEvent extends Event {
+	
+	private int customerId;
 
-	public PickEvent(double time) {
+	public PickEvent(double time, int customerId) {
 		super(time);
+		this.customerId = customerId;
 	}
 	
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
+		SupermarketState supermarketState = (SupermarketState) state;
+		
+		if(supermarketState.hasAvailableCheckout()) {
+			supermarketState.decreaseAvaibleCheckouts();
+		}
 		/* TODO
 		 * Denna händelsesort motsvarar att en kund C plockat alla sina varor, gått bort till
 		 * kassorna och är klar att betala.
@@ -26,3 +34,4 @@ class PickEvent extends Event {
 	}
 	
 }
+//Ludvig tar denna
