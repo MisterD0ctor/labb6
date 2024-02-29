@@ -13,7 +13,7 @@ public class Simulator {
 		while (state.running) {
 			Event event = eventQueue.dequeue();
 			
-			if (!event.equals(null)) {
+			if (event != null) {
 				event.execute(state, eventQueue);				
 			}
 		}
