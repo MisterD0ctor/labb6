@@ -9,11 +9,11 @@ import supermarket_simulator.events.StartEvent;
 public class Optimize {
 
 	
-	public StoreState runSim(int n, int m, double lambda, 
+	public SupermarketState runSim(int n, int m, double lambda, 
 		double kMin, double kMax, double pMin, 
 		double pMax, long f, double s) {
 		
-		StoreState state = new StoreState(
+		SupermarketState state = new SupermarketState(
 				n, 
 				m,
 				lambda,
