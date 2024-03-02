@@ -1,39 +1,32 @@
 package supermarket_simulator.events;
-import generic_simulator.Event;
+
 import generic_simulator.EventQueue;
 import generic_simulator.State;
-import supermarket_simulator.StoreState;
-import supermarket_simulator.Customer;
+import supermarket_simulator.customers.Customer;
 
-class ArivalEvent extends Event {
-	
-	public Customer customer;
-	
+public class ArivalEvent extends SupermarketEvent {
+
+	public final Customer customer;
+
 	public ArivalEvent(double time, Customer customer) {
 		super(time);
 		this.customer = customer;
 	}
-	
+
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
-		
-		StoreState store = (StoreState)state;
-		store.notifyObservers(this);
-		
-		eventQueue.enqueue(new PickEvent(
-				store.pickTimeProvider.next(), 
-				this.customer));
-		
-		if (store.isClosed) {
+
+		store.incrementCustomers();
+		eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
+
+		if (store.isClosed()) {
 			return;
-		} else if (store.customerCount >= store.maxCustomerCount) {
-			store.missedCustomerCount++;
+		} else if (store.isAtCapacity()) {
+			store.incrementMissedCustomers();
 			return;
 		}
-		
-		eventQueue.enqueue(new ArivalEvent(
-				store.arivalTimeProvider.next(), 
-				store.customerFactory.getCustomer()));		
+
+		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.getCustomer()));
 	}
 }

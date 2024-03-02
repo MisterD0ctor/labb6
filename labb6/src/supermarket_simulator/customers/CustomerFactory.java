@@ -1,4 +1,4 @@
-package supermarket_simulator;
+package supermarket_simulator.customers;
 
 public class CustomerFactory {
 	private float customerCount;

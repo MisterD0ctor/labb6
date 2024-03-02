@@ -1,13 +1,12 @@
 package supermarket_simulator.events;
-import generic_simulator.Event;
+
 import generic_simulator.EventQueue;
 import generic_simulator.State;
-import supermarket_simulator.StoreState;
-import supermarket_simulator.Customer;
+import supermarket_simulator.customers.Customer;
 
-public class PayEvent extends Event {
+public class PayEvent extends SupermarketEvent {
 	
-	private Customer customer;
+	public final Customer customer;
 	
 	public PayEvent(double time, Customer customer) {
 		super(time);
@@ -18,19 +17,18 @@ public class PayEvent extends Event {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		StoreState store = (StoreState)state;
-		store.notifyObservers(this);
+		// En kund har betalat så antalet kunder i snabbköpet minskar med ett
+		store.decrementCustomers();
+		store.incrementPayingCustomers();
 		
-		store.customerCount--;
-		store.payCount++;
-		
-		if (store.checkoutQueue.isEmpty()) {
-			store.availableCheckoutsCount++;
+		if (store.queueingCustomers() == 0) {
+			// Inga kunder står i kö så en kassa blir ledig
+			store.incrementIdleCheckouts();
 		} else {
-			Customer c = store.checkoutQueue.pop();
-			store.totalQueueTime += time; 
-			
-			eventQueue.enqueue(new PayEvent(store.payTimeProvider.next(), c));
+			// (Minst) en kund står i kö så kassan blir genast ockuperad igen
+			Customer c = store.dequeueCustomer();
+			// Ett nytt betalningsevent skapas för den kund som stod först i kassakön
+			eventQueue.enqueue(new PayEvent(store.nextPayTime(), c));
 		}
 	}
 }

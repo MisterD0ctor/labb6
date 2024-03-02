@@ -1,10 +1,9 @@
 package supermarket_simulator.events;
-import generic_simulator.Event;
+
 import generic_simulator.EventQueue;
 import generic_simulator.State;
-import supermarket_simulator.StoreState;
 
-public class CloseEvent extends Event {
+public class CloseEvent extends SupermarketEvent {
 
 	public CloseEvent(double time) {
 		super(time);
@@ -13,10 +12,7 @@ public class CloseEvent extends Event {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
-		
-		StoreState store = (StoreState)state;
-		store.notifyObservers(this);
-		
-		store.isClosed = true;
+
+		store.close();
 	}
 }

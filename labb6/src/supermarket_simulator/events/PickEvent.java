@@ -3,12 +3,11 @@ package supermarket_simulator.events;
 import generic_simulator.Event;
 import generic_simulator.EventQueue;
 import generic_simulator.State;
-import supermarket_simulator.Customer;
-import supermarket_simulator.StoreState;
+import supermarket_simulator.customers.Customer;
 
-public class PickEvent extends Event {
+public class PickEvent extends SupermarketEvent {
     
-    private Customer customer;
+    public final Customer customer;
 
     public PickEvent(double time, Customer customer) {
         super(time);
@@ -18,23 +17,17 @@ public class PickEvent extends Event {
     @Override
     public void execute(State state, EventQueue eventQueue) {
         super.execute(state, eventQueue);
-        
-        StoreState store = (StoreState) state;
-        store.notifyObservers(this);
-        
+               
         // Kontrollera om det finns lediga kassor
-        if(store.availableCheckoutsCount > 0) {
-            //Minskar antalet lediga kassor eftersom, en till är upptagen nu
-            store.availableCheckoutsCount -= 1;
+        if (store.idleCheckouts() > 0) {
+            // Minskar antalet lediga kassor eftersom en till är upptagen nu
+            store.decrementIdleCheckouts();
             
-            Event payEvent = new PayEvent(store.payTimeProvider.next(), customer);
+            Event payEvent = new PayEvent(store.nextPayTime(), customer);
             eventQueue.enqueue(payEvent);
         } else { 
-
-            // Alla kassor är upptagna, ställ kunden i kö
-            store.checkoutQueue.offer(customer);
-            store.totalQueueTime -= time;
+            // Alla kassor är upptagna, ställ kunden i kassakön
+            store.enqueueCustomer(customer);
         }
     }
 }
-//Ludvig tar denna
