@@ -1,12 +1,19 @@
 package supermarket_simulator;
+
 import java.util.Observable;
 
 import generic_simulator.*;
-import supermarket_simulator.*;
+import supermarket_simulator.SupermarketState;
 import supermarket_simulator.events.*;
 
 @SuppressWarnings("deprecation")
 class SupermarketView extends View {
+	
+	public SupermarketView(int openCheckouts, int customerCapacity, double arivalFrequency, double minPickTime,
+			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
+		
+		System.out.print("");
+	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
