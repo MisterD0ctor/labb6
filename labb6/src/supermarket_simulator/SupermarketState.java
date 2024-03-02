@@ -1,7 +1,5 @@
 package supermarket_simulator;
 
-import java.util.ArrayDeque;
-
 import fifo.FIFO;
 import generic_simulator.State;
 import supermarket_simulator.customers.Customer;
