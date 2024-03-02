@@ -15,7 +15,7 @@ public class FIFO<E> {
 	}
 
 	public E dequeue() {
-		if (isEmpty()) {
+		if (list.isEmpty()) {
 			return null;
 		} else {
 			return list.remove(0);
