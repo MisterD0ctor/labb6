@@ -144,6 +144,7 @@ public class SupermarketState extends State {
 		} else {
 			queueingTime += amount;
 		}
+		setChanged();
 	}
 	
 	public int payingCustomers() {
@@ -152,6 +153,7 @@ public class SupermarketState extends State {
 	
 	public void incrementPayingCustomers() {
 		payingCustomers++;
+		setChanged();
 	}
 	
 	public double queueingTime() {
