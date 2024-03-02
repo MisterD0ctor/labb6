@@ -21,9 +21,10 @@ public class SupermarketEvent extends Event {
 		// Updatera view innan snabbköpet uppdateras
 		store.notifyObservers(this);
 		
-		/* Kötidsberäkningen görs innan snabbköpets tid uppdateras 
-		 * då den gamla tiden krävs för att beräkna tidsskillnaden */
-		store.incrementQueueingTime((this.time - store.time) * store.queueingCustomers());
+		double deltaTime = (this.time - store.time); // tidsdeltan mellan förra och det nuvarande eventet
+		
+		store.incrementQueueingTime(deltaTime * store.queueingCustomers()); 
+		store.incrementIdleCheckoutsTime(deltaTime * store.idleCheckouts());
 		
 		super.execute(state, eventQueue);
 	}
