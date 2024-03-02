@@ -7,10 +7,10 @@ import supermarket_simulator.SupermarketState;
 
 public class SupermarketEvent extends Event {
 
-	SupermarketState store;
+	protected SupermarketState store; 
 	
 	public SupermarketEvent(double time) {
-		super(time);
+		super(time); 
 	}
 	
 	@SuppressWarnings("deprecation")
