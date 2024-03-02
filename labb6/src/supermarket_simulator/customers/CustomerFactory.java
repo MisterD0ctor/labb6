@@ -1,10 +1,10 @@
 package supermarket_simulator.customers;
 
 public class CustomerFactory {
-	private float customerCount;
+	private int customerCount;
 	
 	public CustomerFactory() {
-		customerCount = 0f;
+		customerCount = 0;
 	}
 	
 	public Customer getCustomer() {

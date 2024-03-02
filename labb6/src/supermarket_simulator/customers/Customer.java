@@ -1,14 +1,14 @@
 package supermarket_simulator.customers;
 
 public class Customer {
-	public final float id;
+	public final int id;
 	
-	Customer(float id) {
+	Customer(int id) {
 		this.id = id;
 	}
 	
 	@Override
 	public String toString() {
-		return Double.toString(id);
+		return Integer.toString(id);
 	}
 }
