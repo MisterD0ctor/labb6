@@ -23,13 +23,13 @@ public class RunSim {
 		SupermarketView view = new SupermarketView(openCheckouts, customerCapacity, arivalFrequency, minPickTime,
 				maxPickTime, minPayTime, maxPayTime, seed);
 		
-		state.addObserver(view);
-		EventQueue eventQueue = new EventQueue();
-		eventQueue.enqueue(new StartEvent());
-		eventQueue.enqueue(new CloseEvent(Double.parseDouble(args[7])));
-		eventQueue.enqueue(new StopEvent(999.0));
-		Simulator sim = new Simulator(state, eventQueue);
-		sim.run();
+		state.addObserver(view); // Lägger view som observer på Supermarket
+		EventQueue eventQueue = new EventQueue(); //Skapar ny eventqueue
+		eventQueue.enqueue(new StartEvent()); //Lägger till Startevent, Första eventet som kommer till Queue:n
+		eventQueue.enqueue(new CloseEvent(Double.parseDouble(args[7]))); //När affären skall stänga
+		eventQueue.enqueue(new StopEvent(999.0)); //Det som stoppar simulatorn från att fortskriva
+		Simulator sim = new Simulator(state, eventQueue); //Skickar med det state som simuleringen skall utföras på och eventQueue (kön) som den skall innehålla
+		sim.run(); //KÖR SIMULERING
 	}
 
 }
