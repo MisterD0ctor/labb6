@@ -3,7 +3,7 @@ package supermarket_simulator.customers;
 public class Customer {
 	public final int id;
 	
-	Customer(int id) {
+	protected Customer(int id) {
 		this.id = id;
 	}
 	
