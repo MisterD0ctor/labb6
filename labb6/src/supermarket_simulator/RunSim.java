@@ -8,11 +8,21 @@ public class RunSim {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
-		SupermarketState state = new SupermarketState(Integer.parseInt(args[0]), Integer.parseInt(args[1]),
-				Double.parseDouble(args[2]), Double.parseDouble(args[3]), Double.parseDouble(args[4]),
-				Double.parseDouble(args[5]), Double.parseDouble(args[6]), Integer.parseInt(args[8]));
+		int openCheckouts = Integer.parseInt(args[1]);
+		int customerCapacity = Integer.parseInt(args[1]);
+		double arivalFrequency = Double.parseDouble(args[2]);
+		double minPickTime = Double.parseDouble(args[3]);
+		double maxPickTime = Double.parseDouble(args[4]);
+		double minPayTime = Double.parseDouble(args[5]);
+		double maxPayTime = Double.parseDouble(args[6]);
+		long seed = Integer.parseInt(args[8]);
 
-		SupermarketView view = new SupermarketView();
+		SupermarketState state = new SupermarketState(openCheckouts, customerCapacity, arivalFrequency, minPickTime,
+				maxPickTime, minPayTime, maxPayTime, seed);
+
+		SupermarketView view = new SupermarketView(openCheckouts, customerCapacity, arivalFrequency, minPickTime,
+				maxPickTime, minPayTime, maxPayTime, seed);
+		
 		state.addObserver(view);
 		EventQueue eventQueue = new EventQueue();
 		eventQueue.enqueue(new StartEvent());
