@@ -10,9 +10,9 @@ public class Optimize {
 
 	
 	public SupermarketState runSim(int n, int m, double lambda, double kMin, double kMax, double pMin, double pMax,
-			long f, double s) { //Tar in 
+			long d, double s) { //Tar in 
 		
-		SupermarketState state = new SupermarketState(n, m, lambda, kMin, kMax, pMin, pMax, f);
+		SupermarketState state = new SupermarketState(n, m, lambda, kMin, kMax, pMin, pMax, d);
 		//
 		
 		EventQueue eventQueue = new EventQueue(); //Skapar ny instans av klassen EventQueue
@@ -27,8 +27,14 @@ public class Optimize {
 	
 	//TODO Metod 2 Optimering av metod 1 via en loop.
 	
-	
-	
+	public int methodtwo () {
+		int miss = 1;
+		int i = 0;
+		for (i = 0; miss > 0; i++){
+			miss = runSim(i, 40, 5.0, 0.25, 1.0, 0.25, 1.0, Long.parseLong(String.valueOf(123456789.0)), 16.0).missedCustomers();
+		}
+		return i;
+	}
 	
 	
 	
