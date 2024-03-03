@@ -42,7 +42,7 @@ public class Optimize {
 	}
 	
 	
-	//Metod 3
+	//Metod 3 - ska starta
 	
 }
 
