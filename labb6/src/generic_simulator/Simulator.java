@@ -16,7 +16,7 @@ public class Simulator {
 	}
 
 	public void run() {
-		while (state.isRunning()) {
+		while (state.isRunning() && !eventQueue.isEmpty()) {
 			Event event = eventQueue.dequeue(); // plockar event från eventqueue via dequeue för att sedan köra dem
 
 			if (event != null) {

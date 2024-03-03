@@ -25,8 +25,6 @@ public class SupermarketEvent extends Event {
 		store.incrementQueueingTime(deltaTime * store.queueingCustomers());
 		store.incrementIdleCheckoutTime(deltaTime * store.idleCheckouts());
 
-		store.notifyObservers(this);
-
 		super.execute(state, eventQueue);
 	}
 
