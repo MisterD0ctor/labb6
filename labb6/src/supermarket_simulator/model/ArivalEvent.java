@@ -1,7 +1,7 @@
 package supermarket_simulator.model;
 
 import generic_simulator.EventQueue;
-import generic_simulator.State;
+import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 public class ArivalEvent extends SupermarketEvent {
@@ -26,10 +26,10 @@ public class ArivalEvent extends SupermarketEvent {
 		} else {
 			// Det finns plats i snabbköpet och ett framtida ankomstevent skapas
 			store.incrementCustomers();			
-			eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
+			// Ett framtida plockevent skapas för kunden som har anlänt
+			eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
 		}
 		
-		// Ett framtida plockevent skapas för kunden som har anlänt
-		eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
+		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
 }

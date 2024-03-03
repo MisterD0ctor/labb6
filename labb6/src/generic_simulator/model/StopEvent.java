@@ -1,4 +1,6 @@
-package generic_simulator;
+package generic_simulator.model;
+
+import generic_simulator.EventQueue;
 
 public class StopEvent extends Event {
 	
@@ -10,6 +12,6 @@ public class StopEvent extends Event {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue); // Keep counting time?
 		
-		state.running = false;
+		state.stop();
 	}
 }

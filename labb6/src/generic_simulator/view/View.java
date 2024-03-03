@@ -1,4 +1,4 @@
-package generic_simulator;
+package generic_simulator.view;
 
 import java.util.Observable;
 import java.util.Observer;

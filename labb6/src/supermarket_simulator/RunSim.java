@@ -1,6 +1,7 @@
 package supermarket_simulator;
 
-import generic_simulator.*;
+import generic_simulator.EventQueue;
+import generic_simulator.Simulator;
 import supermarket_simulator.model.*;
 import supermarket_simulator.view.SupermarketView;
 
@@ -27,7 +28,7 @@ public class RunSim {
 		
 		state.addObserver(view); // Lägger view som observer på Supermarket
 		EventQueue eventQueue = new EventQueue(); //Skapar ny eventqueue
-		eventQueue.enqueue(new StartEvent()); //Lägger till Startevent, Första eventet som kommer till Queue:n
+		eventQueue.enqueue(new StartEvent(0)); //Lägger till Startevent, Första eventet som kommer till Queue:n
 		eventQueue.enqueue(new CloseEvent(closeTime)); //När affären skall stänga
 		eventQueue.enqueue(new StopEvent(999.0)); //Det som stoppar simulatorn från att fortskriva
 		Simulator sim = new Simulator(state, eventQueue); //Skickar med det state som simuleringen skall utföras på och eventQueue (kön) som den skall innehålla

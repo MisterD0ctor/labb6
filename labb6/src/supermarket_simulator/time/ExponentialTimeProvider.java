@@ -14,6 +14,6 @@ public class ExponentialTimeProvider {
 	}
 
 	public double next() {
-		return state.time + stream.next();
+		return state.time() + stream.next();
 	}
 }

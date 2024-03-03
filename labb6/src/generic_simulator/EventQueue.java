@@ -2,12 +2,14 @@ package generic_simulator;
 
 import java.util.PriorityQueue;
 
+import generic_simulator.model.Event;
+
 public class EventQueue {
 
 	private PriorityQueue<Event> queue; // En prioritetskö för händelser
 	
 	public EventQueue() {
-        queue = new PriorityQueue<Event>((e1, e2) -> Double.compare(e1.time, e2.time));
+        queue = new PriorityQueue<Event>((e1, e2) -> Double.compare(e1.time(), e2.time()));
     }
 	
 	public void enqueue(Event event) {

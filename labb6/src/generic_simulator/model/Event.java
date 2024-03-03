@@ -1,4 +1,6 @@
-package generic_simulator;
+package generic_simulator.model;
+
+import generic_simulator.EventQueue;
 
 public class Event {
 	protected final double time;

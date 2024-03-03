@@ -1,13 +1,12 @@
 package supermarket_simulator.model;
 
 import generic_simulator.EventQueue;
-import generic_simulator.State;
+import generic_simulator.model.State;
 
 public class StartEvent extends SupermarketEvent {
 
-	public StartEvent() {
-		super(0); // Super den kallar på konstruktorn i överklassen, Skapar ett event med tiden
-					// noll.
+	public StartEvent(double time) {
+		super(time); // Super den kallar på konstruktorn i överklassen
 	}
 
 	@Override

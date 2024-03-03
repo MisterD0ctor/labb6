@@ -1,7 +1,7 @@
 package supermarket_simulator.model;
 
 import generic_simulator.EventQueue;
-import generic_simulator.State;
+import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 public class PayEvent extends SupermarketEvent {

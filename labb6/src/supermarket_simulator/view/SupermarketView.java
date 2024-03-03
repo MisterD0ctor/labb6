@@ -2,9 +2,9 @@ package supermarket_simulator.view;
 
 import java.util.Observable;
 
-import generic_simulator.Event;
-import generic_simulator.StopEvent;
-import generic_simulator.View;
+import generic_simulator.model.Event;
+import generic_simulator.model.StopEvent;
+import generic_simulator.view.View;
 import supermarket_simulator.model.*;
 
 @SuppressWarnings("deprecation")
@@ -37,15 +37,16 @@ public class SupermarketView extends View {
 		String customerName = customerName(event);
 		String open = store.isClosed() ? "S" : "Ö";
 		
-		if (event instanceof StartEvent) {
-			System.out.printf("%6.2f %s \r\n", event.time(), eventName);
-			return; // tidig retur
-		}
+		//if (event instanceof SupermarketEvent) {
+			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", 
+					event.time(), eventName, customerName, open, store.idleCheckouts(), store.idleCheckoutsTime(), 
+					store.customers(), store.payingCustomers(), store.missedCustomers(), store.queuedCustomers(), 
+					store.queueingTime(), store.queueingCustomers(), store.queueToString());
+		//} else {
+		//	System.out.printf("%6.2f %s \r\n", event.time(), eventName);
+		//}
 		
-		System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", 
-				event.time(), eventName, customerName, open, store.idleCheckouts(), store.idleCheckoutsTime(), 
-				store.customers(), store.payingCustomers(), store.missedCustomers(), store.queuedCustomers(), 
-				store.queueingTime(), store.queueingCustomers(), store.queueToString());
+		
 	}
 	
 	private String eventName(Event event) {

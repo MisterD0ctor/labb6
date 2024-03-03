@@ -1,7 +1,7 @@
 package supermarket_simulator.model;
 
 import fifo.FIFO;
-import generic_simulator.State;
+import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 import supermarket_simulator.customers.CustomerFactory;
 import supermarket_simulator.time.*;
@@ -97,8 +97,12 @@ public class SupermarketState extends State {
 	}
 
 	protected void decrementCustomers() throws IllegalStateException {
-		customers--;
-		setChanged();
+		if (customers <= 0) {
+			throw new IllegalStateException("supermarket already empty");
+		} else {
+			customers--;
+			setChanged();
+		}
 	}
 
 	public int idleCheckouts() {
@@ -193,7 +197,7 @@ public class SupermarketState extends State {
 	public String queueToString() {
 		return checkoutQueue.toString();
 	}
-	
+
 	protected Customer newCustomer() {
 		setChanged();
 		return customerFactory.getCustomer();
