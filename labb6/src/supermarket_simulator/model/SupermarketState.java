@@ -1,4 +1,4 @@
-package supermarket_simulator;
+package supermarket_simulator.model;
 
 import fifo.FIFO;
 import generic_simulator.State;
@@ -57,7 +57,7 @@ public class SupermarketState extends State {
 		return isClosed;
 	}
 
-	public void close() {
+	protected void close() {
 		isClosed = true;
 		setChanged();
 	}
@@ -66,11 +66,11 @@ public class SupermarketState extends State {
 		return customerCapacity <= customers;
 	}
 
-	public int gustomers() {
+	public int customers() {
 		return customers;
 	}
 
-	public void incrementCustomers() throws IllegalStateException {
+	protected void incrementCustomers() throws IllegalStateException {
 		if (isAtCapacity()) {
 			throw new IllegalStateException("supermarket already at capacity");
 		}
@@ -79,7 +79,7 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
-	public void decrementCustomers() throws IllegalStateException {
+	protected void decrementCustomers() throws IllegalStateException {
 		customers++;
 		setChanged();
 	}
@@ -88,7 +88,7 @@ public class SupermarketState extends State {
 		return idleCheckouts;
 	}
 
-	public void incrementIdleCheckouts() throws IllegalStateException {
+	protected void incrementIdleCheckouts() throws IllegalStateException {
 		// antalet lediga kassor ska inte få vara fler än totala antalet kassor
 		if (idleCheckouts == openCheckouts) {
 			throw new IllegalStateException("max number of checkouts are already idle");
@@ -98,7 +98,7 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
-	public void decrementIdleCheckouts() {
+	protected void decrementIdleCheckouts() {
 		// antalet lediga kassor ska inte få vara mindre än noll
 		if (idleCheckouts == 0) {
 			throw new IllegalStateException("number of idle checkouts already zero");
@@ -108,7 +108,7 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
-	public void incrementMissedCustomers() {
+	protected void incrementMissedCustomers() {
 		missedCustomers++;
 		setChanged();
 	}
@@ -117,13 +117,14 @@ public class SupermarketState extends State {
 		return missedCustomers;
 	}
 
-	public void enqueueCustomer(Customer customer) {
+	protected void enqueueCustomer(Customer customer) {
 		checkoutQueue.enqueue(customer);
 		queuedCustomers++;
 		setChanged();
 	}
 
-	public Customer dequeueCustomer() {
+	protected Customer dequeueCustomer() {
+		setChanged();
 		return checkoutQueue.dequeue();
 	}
 
@@ -139,7 +140,7 @@ public class SupermarketState extends State {
 		return idleCheckoutsTime;
 	}
 	
-	public void incrementIdleCheckoutsTime(double amount) {
+	protected void incrementIdleCheckoutsTime(double amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("amount must be positive");
 		} else {
@@ -151,8 +152,8 @@ public class SupermarketState extends State {
 	public double queueingTime() {
 		return queueingTime;
 	}
-	
-	public void incrementQueueingTime(double amount) throws IllegalArgumentException {
+
+	protected void incrementQueueingTime(double amount) throws IllegalArgumentException {
 		if (amount < 0) {
 			throw new IllegalArgumentException("amount must be positive");
 		} else {
@@ -165,24 +166,29 @@ public class SupermarketState extends State {
 		return payingCustomers;
 	}
 
-	public void incrementPayingCustomers() {
+	protected void incrementPayingCustomers() {
 		payingCustomers++;
 		setChanged();
 	}
 
-	public Customer getCustomer() {
+	public String queueToString() {
+		return checkoutQueue.toString();
+	}
+	
+	protected Customer newCustomer() {
+		setChanged();
 		return customerFactory.getCustomer();
 	}
 
-	public double nextArivalTime() {
+	protected double nextArivalTime() {
 		return arivalTimeProvider.next();
 	}
 
-	public double nextPickTime() {
+	protected double nextPickTime() {
 		return pickTimeProvider.next();
 	}
 
-	public double nextPayTime() {
+	protected double nextPayTime() {
 		return payTimeProvider.next();
 	}
 }

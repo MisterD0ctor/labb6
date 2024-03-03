@@ -1,4 +1,4 @@
-package supermarket_simulator.events;
+package supermarket_simulator.model;
 
 import generic_simulator.Event;
 import generic_simulator.EventQueue;
@@ -17,7 +17,7 @@ public class PickEvent extends SupermarketEvent {
     @Override
     public void execute(State state, EventQueue eventQueue) {
         super.execute(state, eventQueue);
-               
+        
         // Kontrollera om det finns lediga kassor
         if (store.idleCheckouts() > 0) {
             // Minskar antalet lediga kassor eftersom en till är upptagen nu

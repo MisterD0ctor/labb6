@@ -1,4 +1,4 @@
-package supermarket_simulator.events;
+package supermarket_simulator.model;
 
 import generic_simulator.EventQueue;
 import generic_simulator.State;
@@ -27,6 +27,6 @@ public class ArivalEvent extends SupermarketEvent {
 			return;
 		}
 
-		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.getCustomer()));
+		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
 }

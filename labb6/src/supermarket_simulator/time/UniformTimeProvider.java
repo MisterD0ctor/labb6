@@ -1,7 +1,7 @@
 package supermarket_simulator.time;
 
 import random.UniformRandomStream;
-import supermarket_simulator.SupermarketState;
+import supermarket_simulator.model.SupermarketState;
 
 public class UniformTimeProvider {
 

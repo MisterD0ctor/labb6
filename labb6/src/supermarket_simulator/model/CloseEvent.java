@@ -1,4 +1,4 @@
-package supermarket_simulator.events;
+package supermarket_simulator.model;
 
 import generic_simulator.EventQueue;
 import generic_simulator.State;

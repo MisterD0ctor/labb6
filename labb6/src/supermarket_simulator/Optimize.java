@@ -3,8 +3,9 @@ package supermarket_simulator;
 import generic_simulator.EventQueue;
 import generic_simulator.Simulator;
 import generic_simulator.StopEvent;
-import supermarket_simulator.events.CloseEvent;
-import supermarket_simulator.events.StartEvent;
+import supermarket_simulator.model.CloseEvent;
+import supermarket_simulator.model.StartEvent;
+import supermarket_simulator.model.SupermarketState;
 
 public class Optimize {
 

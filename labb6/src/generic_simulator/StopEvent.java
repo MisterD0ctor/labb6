@@ -3,7 +3,7 @@ package generic_simulator;
 public class StopEvent extends Event {
 	
 	public StopEvent(double time) {
-		super(time);
+		super(time); // Kallar på konstruktorn till Event
 	}
 	
 	@Override

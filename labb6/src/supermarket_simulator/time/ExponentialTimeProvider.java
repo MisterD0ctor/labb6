@@ -1,7 +1,7 @@
 package supermarket_simulator.time;
 
-import supermarket_simulator.SupermarketState;
 import random.ExponentialRandomStream;
+import supermarket_simulator.model.SupermarketState;
 
 public class ExponentialTimeProvider {
 
