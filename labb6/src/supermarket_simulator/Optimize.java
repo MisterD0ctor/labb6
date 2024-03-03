@@ -61,7 +61,7 @@ public class Optimize {
 
         return highestMin;
     }
-	}
+	
 	
 }
 
