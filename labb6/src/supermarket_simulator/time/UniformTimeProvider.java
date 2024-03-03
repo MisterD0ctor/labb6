@@ -1,7 +1,7 @@
 package supermarket_simulator.time;
 
 import random.UniformRandomStream;
-import supermarket_simulator.model.SupermarketState;
+import generic_simulator.model.State;
 
 /**
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
@@ -9,9 +9,9 @@ import supermarket_simulator.model.SupermarketState;
 public class UniformTimeProvider {
 
 	private UniformRandomStream stream;
-	private SupermarketState state;
+	private State state;
 
-	public UniformTimeProvider(SupermarketState state, double minTime, double maxTime, long seed) {
+	public UniformTimeProvider(State state, double minTime, double maxTime, long seed) {
 		stream = new UniformRandomStream(minTime, maxTime, seed);
 		this.state = state;
 	}
