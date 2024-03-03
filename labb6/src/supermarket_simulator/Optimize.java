@@ -9,6 +9,10 @@ import supermarket_simulator.model.SupermarketState;
 
 public class Optimize {
 
+	public static void main (String[] args) {
+		Optimize op = new Optimize(); 
+		System.out.print(op.methodtwo());
+	}
 	
 	public SupermarketState runSim(int n, int m, double lambda, double kMin, double kMax, double pMin, double pMax,
 			long d, double s) { //Tar in 
@@ -26,13 +30,13 @@ public class Optimize {
 	}
 
 	
-	//TODO Metod 2 Optimering av metod 1 via en loop.
+	//Metod 2
 	
 	public int methodtwo () {
 		int miss = 1;
-		int i = 0;
-		for (i = 0; miss > 0; i++){
-			miss = runSim(i, 40, 5.0, 0.25, 1.0, 0.25, 1.0, Long.parseLong(String.valueOf(123456789.0)), 16.0).missedCustomers();
+		int i;
+		for (i = 2; miss > 0; i++){
+			miss = runSim(i, 100, 5.0, 0.25, 1.0, 0.25, 1.0, Long.parseLong(String.valueOf(123456789)), 16.0).missedCustomers();
 		}
 		return i;
 	}
