@@ -33,20 +33,43 @@ public class SupermarketView extends View {
 	public void update(Observable o, Object arg) {
 		SupermarketState store = (SupermarketState)o;
 		Event event = (Event)arg;
+		
+		printEvent(event, store);
+		
+		if (event instanceof StopEvent) {
+			printResult(store);
+		}
+		
+	}
+	
+	private void printEvent(Event event, SupermarketState store) {
 		String eventName = eventName(event);
-		String customerName = customerName(event);
 		String open = store.isClosed() ? "S" : "Ö";
 		
-		//if (event instanceof SupermarketEvent) {
+		if (event instanceof StartEvent || event instanceof StopEvent) {
+			System.out.printf("%6.2f %s \r\n", event.time(), eventName);
+		} else {
 			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", 
-					event.time(), eventName, customerName, open, store.idleCheckouts(), store.idleCheckoutsTime(), 
-					store.customers(), store.payingCustomers(), store.missedCustomers(), store.queuedCustomers(), 
+					event.time(), eventName, customerName(event), open, store.idleCheckouts(), store.idleCheckoutTime(), 
+					store.customers(), store.visits(), store.missedCustomers(), store.queuedCustomers(), 
 					store.queueingTime(), store.queueingCustomers(), store.queueToString());
-		//} else {
-		//	System.out.printf("%6.2f %s \r\n", event.time(), eventName);
-		//}
-		
-		
+		}
+	}
+	
+	private void printResult(SupermarketState store) {
+		double avrageIdleCheckoutTime = store.idleCheckoutTime() / store.checkouts();
+		double avrageQueueingTime = store.queueingTime() / store.queuedCustomers();
+		System.out.printf("\r\nRESULTAT\r\n"
+				+ "========\r\n"
+				+ "1) Av %d kunder handlade %d medan %d missades.\r\n"
+				+ "2) Total tid %d kassor varit lediga: %.2f te.\r\n"
+				+ "Genomsnittlig ledig kassatid: %.2f te (dvs %.2f%% av tiden från öppning tills sista kunden "
+				+ "betalat).\r\n"
+				+ "3) Total tid %d kunder tvingats köa: %.2f te.\r\n"
+				+ "Genomsnittlig kötid: %.2f te.", store.attemptedVisits(), store.visits(), store.missedCustomers(),
+				store.checkouts(), store.idleCheckoutTime(), avrageIdleCheckoutTime, 
+				avrageIdleCheckoutTime / store.time() * 100.0, store.queuedCustomers(), store.queueingTime(), 
+				avrageQueueingTime);
 	}
 	
 	private String eventName(Event event) {
