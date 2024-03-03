@@ -54,7 +54,7 @@ public class Optimize {
 	    	
 	
 	
-	//Metod 3 - ska starta highestMin...
+	//Metod 3 - ska starta highestMin.....
 	
 	public int highestMin (int customerCapacity, double arivalFrequency, double minPickTime,
 		double maxPickTime, double minPayTime, double maxPayTime,double closeTime,double stopTime, int f) {
