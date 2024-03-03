@@ -32,6 +32,22 @@ public class SupermarketState extends State {
 	public SupermarketState(int openCheckouts, int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
 
+		if (openCheckouts < 1) {
+			throw new IllegalArgumentException("openCheckouts must be > 0");
+		} else if (customerCapacity < 1) {
+			throw new IllegalArgumentException("customerCapacity must be > 0");
+		} else if (arivalFrequency <= 0) {
+			throw new IllegalArgumentException("arivalFrequency must be > 0");
+		} else if (minPickTime <= 0) {
+			throw new IllegalArgumentException("minPickTime must be > 0");
+		} else if (maxPickTime <= 0) {
+			throw new IllegalArgumentException("maxPickTime must be > 0");
+		} else if (minPayTime <= 0) {
+			throw new IllegalArgumentException("minPayTime must be > 0");
+		} else if (maxPayTime <= 0) {
+			throw new IllegalArgumentException("maxPayTime must be > 0");
+		}
+		
 		this.openCheckouts = openCheckouts;
 		this.customerCapacity = customerCapacity;
 		this.arivalTimeProvider = new ExponentialTimeProvider(this, arivalFrequency, seed);
@@ -73,14 +89,15 @@ public class SupermarketState extends State {
 	protected void incrementCustomers() throws IllegalStateException {
 		if (isAtCapacity()) {
 			throw new IllegalStateException("supermarket already at capacity");
+		} else {
+			customers++;
+			setChanged();			
 		}
 
-		customers++;
-		setChanged();
 	}
 
 	protected void decrementCustomers() throws IllegalStateException {
-		customers++;
+		customers--;
 		setChanged();
 	}
 
@@ -92,20 +109,22 @@ public class SupermarketState extends State {
 		// antalet lediga kassor ska inte få vara fler än totala antalet kassor
 		if (idleCheckouts == openCheckouts) {
 			throw new IllegalStateException("max number of checkouts are already idle");
+		} else {
+			idleCheckouts++;
+			setChanged();			
 		}
 
-		idleCheckouts++;
-		setChanged();
 	}
 
 	protected void decrementIdleCheckouts() {
 		// antalet lediga kassor ska inte få vara mindre än noll
 		if (idleCheckouts == 0) {
 			throw new IllegalStateException("number of idle checkouts already zero");
+		} else {
+			idleCheckouts--;
+			setChanged();			
 		}
 
-		idleCheckouts--;
-		setChanged();
 	}
 
 	protected void incrementMissedCustomers() {
@@ -145,8 +164,8 @@ public class SupermarketState extends State {
 			throw new IllegalArgumentException("amount must be positive");
 		} else {
 			idleCheckoutsTime += amount;
+			setChanged();
 		}
-		setChanged();
 	}
 
 	public double queueingTime() {
@@ -158,8 +177,8 @@ public class SupermarketState extends State {
 			throw new IllegalArgumentException("amount must be positive");
 		} else {
 			queueingTime += amount;
+			setChanged();
 		}
-		setChanged();
 	}
 
 	public int payingCustomers() {
@@ -181,14 +200,17 @@ public class SupermarketState extends State {
 	}
 
 	protected double nextArivalTime() {
+		setChanged();
 		return arivalTimeProvider.next();
 	}
 
 	protected double nextPickTime() {
+		setChanged();
 		return pickTimeProvider.next();
 	}
 
 	protected double nextPayTime() {
+		setChanged();
 		return payTimeProvider.next();
 	}
 }

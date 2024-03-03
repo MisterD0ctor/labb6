@@ -16,18 +16,16 @@ public class ArivalEvent extends SupermarketEvent {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
-
-		store.incrementCustomers();
-		eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
-
+		
 		if (store.isClosed()) {
 			return;
 		} else if (store.isAtCapacity()) {
 			store.incrementMissedCustomers();
-			return;
 		} else {
-			eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));			
+			store.incrementCustomers();			
+			eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 		}
-
+		
+		eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
 	}
 }
