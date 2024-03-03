@@ -25,8 +25,9 @@ public class ArivalEvent extends SupermarketEvent {
 		} else if (store.isAtCapacity()) {
 			store.incrementMissedCustomers();
 			return;
+		} else {
+			eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));			
 		}
 
-		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
 }
