@@ -1,6 +1,6 @@
 package generic_simulator;
 
-import java.util.PriorityQueue; //TILLAGD
+import java.util.PriorityQueue;
 
 public class EventQueue {
 
