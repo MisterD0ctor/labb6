@@ -14,6 +14,7 @@ public class Optimize {
 	public static void main (String[] args) {
 		Optimize op = new Optimize(); 
 		System.out.print(op.optimalCheckouts(5, 1, 0.5, 1.0, 2.0, 3.0,10,999, 1234));
+		System.out.print(op.highestMin(5, 1, 0.5, 1.0, 2.0, 3.0,10,999, 1234)); // vilka parametrar?????????
 	}
 	
 	public SupermarketState runSim(int checkouts, int customerCapacity, double arivalFrequency, double minPickTime,
@@ -52,9 +53,9 @@ public class Optimize {
 	    	
 	
 	
-	//Metod 3 - ska starta
+	//Metod 3 - ska starta highestMin
 	
-	public int methodthree (int customerCapacity, double arivalFrequency, double minPickTime,
+	public int highestMin (int customerCapacity, double arivalFrequency, double minPickTime,
 		double maxPickTime, double minPayTime, double maxPayTime,double closeTime,double stopTime, int f) {
 		
 		Random random = new Random(f);
