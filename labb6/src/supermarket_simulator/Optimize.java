@@ -25,7 +25,9 @@ public class Optimize {
 	}
 
 	
-	//TODO 
+	//TODO Metod 2 Optimering av metod 1 via en loop.
+	
+	
 	
 	
 	
