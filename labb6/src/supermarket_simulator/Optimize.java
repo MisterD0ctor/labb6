@@ -1,5 +1,5 @@
 package supermarket_simulator;
-
+import java.util.Random;
 import generic_simulator.EventQueue;
 import generic_simulator.Simulator;
 import generic_simulator.StopEvent;
@@ -43,6 +43,25 @@ public class Optimize {
 	
 	
 	//Metod 3 - ska starta
+	
+	public int methodthree (int f) {
+		Random random = new Random(f);
+        int highestMin = Integer.MIN_VALUE; // Initial highest minimum value
+        int consecutiveStableCount = 0;
+		
+        while (consecutiveStableCount < 100) { // Loop until 100 consecutive stable iterations
+            int min = methodtwo(); // Run methodtwo
+            if (min > highestMin) { // Check if new highest minimum found
+                highestMin = min;
+                consecutiveStableCount = 0; // Reset consecutive stable count
+            } else {
+                consecutiveStableCount++; // Increment consecutive stable count
+            }
+        }
+
+        return highestMin;
+    }
+	}
 	
 }
 
