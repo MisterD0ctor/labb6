@@ -19,7 +19,7 @@ public class PayEvent extends SupermarketEvent {
 		
 		// En kund har betalat så antalet kunder i snabbköpet minskar med ett
 		store.decrementCustomers();
-		store.incrementPayingCustomers();
+		store.incrementVisits();
 		
 		if (store.queueingCustomers() == 0) {
 			// Inga kunder står i kö så en kassa blir ledig

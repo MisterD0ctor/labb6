@@ -10,8 +10,6 @@ public class StopEvent extends Event {
 	
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
-		super.execute(state, eventQueue); // Keep counting time?
-		
 		state.stop();
 	}
 }

@@ -11,15 +11,16 @@ public class SupermarketState extends State {
 
 	private boolean isClosed;
 
-	private final int openCheckouts; // antal öppna kassor
+	private final int checkouts; // antal öppna kassor
 	private final int customerCapacity; // maximalt antal kunder som får plats i snabbköpet
 
 	private int idleCheckouts; // antal lediga kassor
 	private int customers; // antal kunder i snabbköpet
-	private int payingCustomers; // antal kunder som betalat
+	private int visits; // antal kunder som besökt snabbköpet och betalat
+	private int attemptedVisits; // antal kunder som försökt besökt snabbköpet
 	private int missedCustomers; // antalt missade kunder
 	private int queuedCustomers; // antlal kunder som köat
-	private double idleCheckoutsTime; // totala tiden som kassor stått lediga
+	private double idleCheckoutTime; // totala tiden som kassor stått lediga
 	private double queueingTime; // totala tiden som kunder stått i kassakön
 
 	private final CustomerFactory customerFactory; // skapar nya kunder med unika id
@@ -29,10 +30,10 @@ public class SupermarketState extends State {
 	private final UniformTimeProvider pickTimeProvider;
 	private final UniformTimeProvider payTimeProvider;
 
-	public SupermarketState(int openCheckouts, int customerCapacity, double arivalFrequency, double minPickTime,
+	public SupermarketState(int checkouts, int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
 
-		if (openCheckouts < 1) {
+		if (checkouts < 1) {
 			throw new IllegalArgumentException("openCheckouts must be > 0");
 		} else if (customerCapacity < 1) {
 			throw new IllegalArgumentException("customerCapacity must be > 0");
@@ -48,19 +49,20 @@ public class SupermarketState extends State {
 			throw new IllegalArgumentException("maxPayTime must be > 0");
 		}
 		
-		this.openCheckouts = openCheckouts;
+		this.checkouts = checkouts;
 		this.customerCapacity = customerCapacity;
 		this.arivalTimeProvider = new ExponentialTimeProvider(this, arivalFrequency, seed);
 		this.pickTimeProvider = new UniformTimeProvider(this, minPickTime, maxPickTime, seed);
 		this.payTimeProvider = new UniformTimeProvider(this, minPayTime, maxPayTime, seed);
 
 		this.isClosed = false;
-		this.idleCheckouts = openCheckouts;
+		this.idleCheckouts = checkouts;
 		this.customers = 0;
-		this.payingCustomers = 0;
+		this.visits = 0;
+		this.attemptedVisits = 0;
 		this.missedCustomers = 0;
 		this.queuedCustomers = 0;
-		this.idleCheckoutsTime = 0;
+		this.idleCheckoutTime = 0;
 		this.queueingTime = 0;
 
 		this.customerFactory = new CustomerFactory();
@@ -69,6 +71,10 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
+	public int checkouts() {
+		return checkouts;
+	}
+	
 	public boolean isClosed() {
 		return isClosed;
 	}
@@ -111,11 +117,11 @@ public class SupermarketState extends State {
 
 	protected void incrementIdleCheckouts() throws IllegalStateException {
 		// antalet lediga kassor ska inte få vara fler än totala antalet kassor
-		if (idleCheckouts == openCheckouts) {
+		if (idleCheckouts == checkouts) {
 			throw new IllegalStateException("max number of checkouts are already idle");
 		} else {
 			idleCheckouts++;
-			setChanged();			
+			setChanged();
 		}
 
 	}
@@ -130,14 +136,32 @@ public class SupermarketState extends State {
 		}
 
 	}
+	
+	public int visits() {
+		return visits;
+	}
 
-	protected void incrementMissedCustomers() {
-		missedCustomers++;
+	protected void incrementVisits() {
+		visits++;
+		setChanged();
+	}
+	
+	public int attemptedVisits() {
+		return attemptedVisits;
+	}
+
+	protected void incrementAttemptedVisits() {
+		attemptedVisits++;
 		setChanged();
 	}
 
 	public int missedCustomers() {
 		return missedCustomers;
+	}
+	
+	protected void incrementMissedCustomers() {
+		missedCustomers++;
+		setChanged();
 	}
 
 	protected void enqueueCustomer(Customer customer) {
@@ -159,15 +183,15 @@ public class SupermarketState extends State {
 		return checkoutQueue.size();
 	}
 
-	public double idleCheckoutsTime() {
-		return idleCheckoutsTime;
+	public double idleCheckoutTime() {
+		return idleCheckoutTime;
 	}
 	
-	protected void incrementIdleCheckoutsTime(double amount) {
+	protected void incrementIdleCheckoutTime(double amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("amount must be positive");
 		} else {
-			idleCheckoutsTime += amount;
+			idleCheckoutTime += amount;
 			setChanged();
 		}
 	}
@@ -183,15 +207,6 @@ public class SupermarketState extends State {
 			queueingTime += amount;
 			setChanged();
 		}
-	}
-
-	public int payingCustomers() {
-		return payingCustomers;
-	}
-
-	protected void incrementPayingCustomers() {
-		payingCustomers++;
-		setChanged();
 	}
 
 	public String queueToString() {

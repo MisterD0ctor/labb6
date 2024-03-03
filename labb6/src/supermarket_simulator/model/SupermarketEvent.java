@@ -20,7 +20,7 @@ public class SupermarketEvent extends Event {
 		double deltaTime = (this.time - store.time()); // tidsdeltan mellan förra och det nuvarande eventet
 		
 		store.incrementQueueingTime(deltaTime * store.queueingCustomers()); 
-		store.incrementIdleCheckoutsTime(deltaTime * store.idleCheckouts());
+		store.incrementIdleCheckoutTime(deltaTime * store.idleCheckouts());
 		
 		store.notifyObservers(this);
 		
