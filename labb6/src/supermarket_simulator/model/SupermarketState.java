@@ -138,7 +138,7 @@ public class SupermarketState extends State {
 
 	protected void enqueueCustomer(Customer customer) {
 		checkoutQueue.enqueue(customer);
-		queuedCustomers++;
+		queuedCustomers++; // Antalet kunder som har köat ökar med ett
 		setChanged();
 	}
 
