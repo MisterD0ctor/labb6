@@ -3,7 +3,8 @@ package fifo;
 import java.util.ArrayList;
 
 /**
- * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
+ * @param <E>
  */
 public class FIFO<E> {
 

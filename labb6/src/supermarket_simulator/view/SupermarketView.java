@@ -6,8 +6,9 @@ import generic_simulator.model.Event;
 import generic_simulator.model.StopEvent;
 import generic_simulator.view.View;
 import supermarket_simulator.model.*;
+
 /**
- * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 @SuppressWarnings("deprecation")
 public class SupermarketView extends View {

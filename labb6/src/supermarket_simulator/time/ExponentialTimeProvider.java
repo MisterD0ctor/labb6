@@ -2,8 +2,9 @@ package supermarket_simulator.time;
 
 import random.ExponentialRandomStream;
 import supermarket_simulator.model.SupermarketState;
+
 /**
- * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class ExponentialTimeProvider {
 
