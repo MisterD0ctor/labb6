@@ -2,9 +2,9 @@ package supermarket_simulator;
 
 import generic_simulator.EventQueue;
 import generic_simulator.Simulator;
-import generic_simulator.StopEvent;
 import supermarket_simulator.model.CloseEvent;
 import supermarket_simulator.model.StartEvent;
+import supermarket_simulator.model.StopEvent;
 import supermarket_simulator.model.SupermarketState;
 
 public class Optimize {
@@ -21,7 +21,7 @@ public class Optimize {
 		//
 		
 		EventQueue eventQueue = new EventQueue(); //Skapar ny instans av klassen EventQueue
-		eventQueue.enqueue(new StartEvent());
+		eventQueue.enqueue(new StartEvent(0));
 		eventQueue.enqueue(new CloseEvent(s));
 		eventQueue.enqueue(new StopEvent(999.0));
 		Simulator sim = new Simulator(state, eventQueue); //Skickar med det state som simuleringen skall utföras på och eventQueue (kön) som den skall innehålla
