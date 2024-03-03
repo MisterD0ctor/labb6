@@ -8,6 +8,8 @@ import supermarket_simulator.model.StopEvent;
 import supermarket_simulator.model.SupermarketState;
 
 public class Optimize {
+	
+	
 
 	public static void main (String[] args) {
 		Optimize op = new Optimize(); 
@@ -30,15 +32,25 @@ public class Optimize {
 	}
 
 	
-	//Metod 2
-	
+	//Metod 2 SAKNAR BINÄRSÖKNING
+	/*
 	public int methodtwo () {
 		int miss = 1;
 		int i;
-		for (i = 2; miss > 0; i++){
-			miss = runSim(i, 100, 5.0, 0.25, 1.0, 0.25, 1.0, Long.parseLong(String.valueOf(123456789)), 16.0).missedCustomers();
+		for (i = 1; miss > 0; i++){
+			miss = runSim(i, 5, 1.0, 2.0, 3.0, 0.5, 1.0, 1234, 16.0).missedCustomers();
 		}
 		return i;
+	}*/
+	public int methodtwo() {
+	    int miss = 1;
+	    int i = 1;  // Starta med 1 eftersom du inte kan ha 0 kassor.
+	    while (miss > 0) {
+	        // Kör simuleringen med 'i' kassor.
+	        miss = runSim(i, 7, 2.0, 2.0, 3.0, 0.5, 1.0, 1234, 16.0).missedCustomers();
+	        i++;  // Öka antalet kassor för nästa iteration.
+	    }
+	    return i + 1;  // Returnera 'i - 1' eftersom 'i' har ökat även när miss = 0.
 	}
 	
 	
@@ -66,4 +78,4 @@ public class Optimize {
 }
 
 
-//David TAR DENNA
+//David TAR DENNA*/
