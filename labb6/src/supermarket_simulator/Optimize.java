@@ -1,3 +1,4 @@
+//David Sämfors, Kasper Axelsson, Ludvig Pernsköld & Zeb Muhlbach
 package supermarket_simulator;
 import java.util.Random;
 import generic_simulator.EventQueue;
