@@ -16,12 +16,12 @@ public class ArivalEvent extends SupermarketEvent {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
-		
+
 		if (store.isClosed()) {
 			// Snabbköpet är stängt och inget nytt ankomstevent skapas
 			return;
-		} 
-		
+		}
+
 		store.incrementAttemptedVisits(); // en kund försöker besöka snabbköpet
 
 		if (store.isAtCapacity()) {
@@ -29,11 +29,11 @@ public class ArivalEvent extends SupermarketEvent {
 			store.incrementMissedCustomers();
 		} else {
 			// Det finns plats i snabbköpet och ett framtida ankomstevent skapas
-			store.incrementCustomers();			
+			store.incrementCustomers();
 			// Ett framtida plockevent skapas för kunden som har anlänt
 			eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
 		}
-		
+
 		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
 }

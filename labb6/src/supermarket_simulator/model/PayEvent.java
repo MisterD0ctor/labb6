@@ -5,22 +5,22 @@ import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 public class PayEvent extends SupermarketEvent {
-	
+
 	public final Customer customer;
-	
+
 	public PayEvent(double time, Customer customer) {
 		super(time);
 		this.customer = customer;
 	}
-	
+
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
-		
+
 		// En kund har betalat så antalet kunder i snabbköpet minskar med ett
 		store.decrementCustomers();
 		store.incrementVisits();
-		
+
 		if (store.queueingCustomers() == 0) {
 			// Inga kunder står i kö så en kassa blir ledig
 			store.incrementIdleCheckouts();

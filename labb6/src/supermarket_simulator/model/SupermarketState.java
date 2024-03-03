@@ -26,13 +26,14 @@ public class SupermarketState extends State {
 	private final CustomerFactory customerFactory; // skapar nya kunder med unika id
 	private final FIFO<Customer> checkoutQueue; // kassakön
 
-	private final ExponentialTimeProvider arivalTimeProvider;
-	private final UniformTimeProvider pickTimeProvider;
-	private final UniformTimeProvider payTimeProvider;
+	private final ExponentialTimeProvider arivalTimeProvider; // genererar tider för ankomstevent
+	private final UniformTimeProvider pickTimeProvider; // genererar tider för plockevent
+	private final UniformTimeProvider payTimeProvider; // genererar tider för betalningsevent
 
 	public SupermarketState(int checkouts, int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
 
+		// Kontrollera att alla parametrar är giltiga
 		if (checkouts < 1) {
 			throw new IllegalArgumentException("openCheckouts must be > 0");
 		} else if (customerCapacity < 1) {
@@ -48,7 +49,7 @@ public class SupermarketState extends State {
 		} else if (maxPayTime <= 0) {
 			throw new IllegalArgumentException("maxPayTime must be > 0");
 		}
-		
+
 		this.checkouts = checkouts;
 		this.customerCapacity = customerCapacity;
 		this.arivalTimeProvider = new ExponentialTimeProvider(this, arivalFrequency, seed);
@@ -74,7 +75,7 @@ public class SupermarketState extends State {
 	public int checkouts() {
 		return checkouts;
 	}
-	
+
 	public boolean isClosed() {
 		return isClosed;
 	}
@@ -97,7 +98,7 @@ public class SupermarketState extends State {
 			throw new IllegalStateException("supermarket already at capacity");
 		} else {
 			customers++;
-			setChanged();			
+			setChanged();
 		}
 
 	}
@@ -132,11 +133,11 @@ public class SupermarketState extends State {
 			throw new IllegalStateException("number of idle checkouts already zero");
 		} else {
 			idleCheckouts--;
-			setChanged();			
+			setChanged();
 		}
 
 	}
-	
+
 	public int visits() {
 		return visits;
 	}
@@ -145,7 +146,7 @@ public class SupermarketState extends State {
 		visits++;
 		setChanged();
 	}
-	
+
 	public int attemptedVisits() {
 		return attemptedVisits;
 	}
@@ -158,7 +159,7 @@ public class SupermarketState extends State {
 	public int missedCustomers() {
 		return missedCustomers;
 	}
-	
+
 	protected void incrementMissedCustomers() {
 		missedCustomers++;
 		setChanged();
@@ -186,7 +187,7 @@ public class SupermarketState extends State {
 	public double idleCheckoutTime() {
 		return idleCheckoutTime;
 	}
-	
+
 	protected void incrementIdleCheckoutTime(double amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("amount must be positive");
