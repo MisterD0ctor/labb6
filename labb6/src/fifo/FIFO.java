@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
- * @param <E>
+ * @param <E> The type stored in this queue
  */
 public class FIFO<E> {
 
@@ -14,8 +14,8 @@ public class FIFO<E> {
 		list = new ArrayList<E>();
 	}
 
-	public void enqueue(E o) {
-		list.add(o);
+	public void enqueue(E e) {
+		list.add(e);
 	}
 
 	public E dequeue() {
