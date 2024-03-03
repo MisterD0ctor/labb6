@@ -22,7 +22,7 @@ public class SupermarketState extends State {
 	private int visits; // antal kunder som besökt snabbköpet och betalat
 	private int attemptedVisits; // antal kunder som försökt besökt snabbköpet
 	private int missedCustomers; // antalt missade kunder
-	private int queuedCustomers; // antlal kunder som köat
+	private int queuedCustomers; // antlal kunder som köat totalt
 	private double idleCheckoutTime; // totala tiden som kassor stått lediga
 	private double queueingTime; // totala tiden som kunder stått i kassakön
 
@@ -96,7 +96,7 @@ public class SupermarketState extends State {
 		return customers;
 	}
 
-	protected void incrementCustomers() throws IllegalStateException {
+	protected void incrementCustomers() throws IllegalStateException { // ökar antalet kunder i snabbköpet med ett
 		if (isAtCapacity()) {
 			throw new IllegalStateException("supermarket already at capacity");
 		} else {
@@ -119,7 +119,7 @@ public class SupermarketState extends State {
 		return idleCheckouts;
 	}
 
-	protected void incrementIdleCheckouts() throws IllegalStateException {
+	protected void incrementIdleCheckouts() throws IllegalStateException { // när en kund lämnar till en kassa
 		// antalet lediga kassor ska inte få vara fler än totala antalet kassor
 		if (idleCheckouts == checkouts) {
 			throw new IllegalStateException("max number of checkouts are already idle");
@@ -130,7 +130,7 @@ public class SupermarketState extends State {
 
 	}
 
-	protected void decrementIdleCheckouts() {
+	protected void decrementIdleCheckouts() throws IllegalStateException { // när en kund går till en kassa
 		// antalet lediga kassor ska inte få vara mindre än noll
 		if (idleCheckouts == 0) {
 			throw new IllegalStateException("number of idle checkouts already zero");
@@ -168,13 +168,13 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
-	protected void enqueueCustomer(Customer customer) {
+	protected void enqueueCustomer(Customer customer) { // lägg till en kund i kassakön
 		checkoutQueue.enqueue(customer);
 		queuedCustomers++; // Antalet kunder som har köat ökar med ett
 		setChanged();
 	}
 
-	protected Customer dequeueCustomer() {
+	protected Customer dequeueCustomer() { // kund går till en kassa
 		setChanged();
 		return checkoutQueue.dequeue();
 	}

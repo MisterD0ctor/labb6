@@ -34,4 +34,5 @@ public class PayEvent extends SupermarketEvent {
 			eventQueue.enqueue(new PayEvent(store.nextPayTime(), c));
 		}
 	}
+	
 }

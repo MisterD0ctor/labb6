@@ -37,6 +37,7 @@ public class ArivalEvent extends SupermarketEvent {
 			eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
 		}
 
+		// En ny kund anländer i framtiden
 		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
 }

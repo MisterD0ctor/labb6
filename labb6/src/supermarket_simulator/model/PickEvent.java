@@ -26,8 +26,7 @@ public class PickEvent extends SupermarketEvent {
 			// Minskar antalet lediga kassor eftersom en till är upptagen nu
 			store.decrementIdleCheckouts();
 
-			Event payEvent = new PayEvent(store.nextPayTime(), customer);
-			eventQueue.enqueue(payEvent);
+			eventQueue.enqueue(new PayEvent(store.nextPayTime(), customer));
 		} else {
 			// Alla kassor är upptagna, ställ kunden i kassakön
 			store.enqueueCustomer(customer);

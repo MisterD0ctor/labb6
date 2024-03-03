@@ -17,10 +17,14 @@ public class SupermarketView extends View {
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
 
 		System.out.printf(
-				"PARAMETRAR\r\n" + "==========\r\n" + "Antal kassor, N..........: %d\r\n"
-						+ "Max som ryms, M..........: %d\r\n" + "Ankomshastighet, lambda..: %.2f\r\n"
-						+ "Plocktider, [P_min..Pmax]: [%.2f..%.2f]\r\n" + "Betaltider, [K_min..Kmax]: [%.2f..%.2f]\r\n"
-						+ "Frö, f...................: %d\r\n\r\n",
+				"PARAMETRAR\r\n" 
+						+ "==========\r\n" 
+						+ "Antal kassor, N..........: %d \r\n"
+						+ "Max som ryms, M..........: %d \r\n" 
+						+ "Ankomshastighet, lambda..: %.2f \r\n"
+						+ "Plocktider, [P_min..Pmax]: [%.2f..%.2f] \r\n" 
+						+ "Betaltider, [K_min..Kmax]: [%.2f..%.2f] \r\n"
+						+ "Frö, f...................: %d \r\n\r\n",
 				openCheckouts, customerCapacity, arivalFrequency, minPickTime, maxPickTime, minPayTime, maxPayTime,
 				seed);
 
@@ -30,28 +34,28 @@ public class SupermarketView extends View {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		SupermarketState store = (SupermarketState) o;
+		SupermarketState state = (SupermarketState) o;
 		Event event = (Event) arg;
 
-		printEvent(event, store);
+		printEvent(event, state);
 
 		if (event instanceof StopEvent) {
-			printResult(store);
+			printResult(state);
 		}
 
 	}
 
-	private void printEvent(Event event, SupermarketState store) {
+	private void printEvent(Event event, SupermarketState state) {
 		String eventName = eventName(event);
-		String open = store.isClosed() ? "S" : "Ö";
 
 		if (event instanceof StartEvent || event instanceof StopEvent) {
 			System.out.printf("%6.2f %s \r\n", event.time(), eventName);
 		} else {
+			String open = state.isClosed() ? "S" : "Ö";
 			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", event.time(), eventName,
-					customerName(event), open, store.idleCheckouts(), store.idleCheckoutTime(), store.customers(),
-					store.visits(), store.missedCustomers(), store.queuedCustomers(), store.queueingTime(),
-					store.queueingCustomers(), store.queueToString());
+					customerName(event), open, state.idleCheckouts(), state.idleCheckoutTime(), state.customers(),
+					state.visits(), state.missedCustomers(), state.queuedCustomers(), state.queueingTime(),
+					state.queueingCustomers(), state.queueToString());
 		}
 	}
 
@@ -88,9 +92,7 @@ public class SupermarketView extends View {
 	}
 
 	private String customerName(Event event) {
-		if (event instanceof StartEvent) {
-			return "";
-		} else if (event instanceof ArivalEvent) {
+		if (event instanceof ArivalEvent) {
 			return ((ArivalEvent) event).customer.toString();
 		} else if (event instanceof PickEvent) {
 			return ((PickEvent) event).customer.toString();
@@ -98,8 +100,6 @@ public class SupermarketView extends View {
 			return ((PayEvent) event).customer.toString();
 		} else if (event instanceof CloseEvent) {
 			return "---";
-		} else if (event instanceof StopEvent) {
-			return "";
 		} else {
 			return "";
 		}
