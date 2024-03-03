@@ -10,8 +10,6 @@ public class RunSim {
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) { 
 
-		System.out.println(1 / 2);
-		
 		int openCheckouts = Integer.parseInt(args[0]); //Skapar antalet kassor, ändrar om args till int.
 		int customerCapacity = Integer.parseInt(args[1]); //Hur många som får finnas i butiken
 		double arivalFrequency = Double.parseDouble(args[2]); //Hur ofta nya kunder kommer, medel för frekvensen över hur många som går in i butiken... Ifall arrivalfrequency är 4 kommer en costumer per kvart
