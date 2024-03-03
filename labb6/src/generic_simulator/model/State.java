@@ -1,7 +1,9 @@
 package generic_simulator.model;
 
 import java.util.Observable;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 @SuppressWarnings("deprecation")
 public class State extends Observable {
  	protected double time;

@@ -2,7 +2,9 @@ package supermarket_simulator.time;
 
 import random.UniformRandomStream;
 import supermarket_simulator.model.SupermarketState;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class UniformTimeProvider {
 
 	private UniformRandomStream stream;

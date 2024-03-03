@@ -5,7 +5,9 @@ import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 import supermarket_simulator.customers.CustomerFactory;
 import supermarket_simulator.time.*;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 @SuppressWarnings("deprecation")
 public class SupermarketState extends State {
 

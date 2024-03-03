@@ -2,6 +2,9 @@ package fifo;
 
 import java.util.ArrayList;
 
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class FIFO<E> {
 
 	private ArrayList<E> list;

@@ -2,7 +2,9 @@ package generic_simulator;
 
 import generic_simulator.model.Event;
 import generic_simulator.model.State;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class Simulator {
 	private State state; //Tillståndet som simuleringen körs på
 	private EventQueue eventQueue; //Event kön som innehåller alla event

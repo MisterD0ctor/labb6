@@ -1,5 +1,7 @@
 package supermarket_simulator.customers;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class CustomerFactory {
 	private int customerCount;
 	

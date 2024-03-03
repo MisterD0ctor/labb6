@@ -1,9 +1,9 @@
-
 package random;
 
 import java.util.Random;
-
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class UniformRandomStream {
 
 	private Random rand;

@@ -1,7 +1,9 @@
 package generic_simulator.model;
 
 import generic_simulator.EventQueue;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class Event {
 	protected final double time;
 	

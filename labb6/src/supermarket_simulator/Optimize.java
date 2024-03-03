@@ -1,4 +1,3 @@
-//David Sämfors, Kasper Axelsson, Ludvig Pernsköld & Zeb Muhlbach
 package supermarket_simulator;
 import java.util.Random;
 import generic_simulator.EventQueue;
@@ -7,9 +6,10 @@ import supermarket_simulator.model.CloseEvent;
 import supermarket_simulator.model.StartEvent;
 import supermarket_simulator.model.StopEvent;
 import supermarket_simulator.model.SupermarketState;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class Optimize {
-	
 	
 
 	public static void main (String[] args) {

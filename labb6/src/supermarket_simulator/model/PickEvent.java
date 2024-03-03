@@ -4,7 +4,9 @@ import generic_simulator.EventQueue;
 import generic_simulator.model.Event;
 import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class PickEvent extends SupermarketEvent {
 
 	public final Customer customer;

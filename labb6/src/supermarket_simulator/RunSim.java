@@ -4,7 +4,9 @@ import generic_simulator.EventQueue;
 import generic_simulator.Simulator;
 import supermarket_simulator.model.*;
 import supermarket_simulator.view.SupermarketView;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class RunSim {
 
 	@SuppressWarnings("deprecation")

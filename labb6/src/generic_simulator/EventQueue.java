@@ -3,7 +3,9 @@ package generic_simulator;
 import java.util.PriorityQueue;
 
 import generic_simulator.model.Event;
-
+/**
+ * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach 
+ */
 public class EventQueue {
 
 	private PriorityQueue<Event> queue; // En prioritetskö för händelser
