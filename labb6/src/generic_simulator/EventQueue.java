@@ -19,7 +19,7 @@ public class EventQueue {
 		queue.offer(event); // Lägg till händelsen i kön
 	}
 
-	Event dequeue() {
+	protected Event dequeue() {
 		return queue.poll(); // Ta bort och returnera den första händelsen i kön //Ifall tom så returnerar
 								// den null
 	}
