@@ -16,13 +16,12 @@ public class StartEvent extends SupermarketEvent {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue); // Kör execute från SupermarketEvent
 
+		SupermarketState store = (SupermarketState) state;
+		
 		if (!store.isAtCapacity()) {
-			eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer())); // Skapar ett nytt
-																								// arivalevent och vi
-																								// hämtar tiden de
-																								// eventet ska ske,
+			// Skapa ett nyt arivalevent och vi hämta tiden de eventet ska ske, sen skapar
+			// vi också en ny kund som de eventet ska ske för. 
+			eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 		}
-		// sen skapar vi också en ny kund som de eventet ska ske för. Skickar vidare de
-		// eventet till eventkön
 	}
 }

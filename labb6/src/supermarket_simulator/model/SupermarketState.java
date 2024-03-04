@@ -27,7 +27,8 @@ public class SupermarketState extends State {
 	private int queuedCustomers; // antlal kunder som köat totalt
 	private double idleCheckoutTime; // totala tiden som kassor stått lediga
 	private double queueingTime; // totala tiden som kunder stått i kassakön
-
+	private double lastCheckoutTime;
+	
 	private final CustomerFactory customerFactory; // skapar nya kunder med unika id
 	private final FIFO<Customer> checkoutQueue; // kassakön
 
@@ -71,6 +72,7 @@ public class SupermarketState extends State {
 		this.queuedCustomers = 0;
 		this.idleCheckoutTime = 0;
 		this.queueingTime = 0;
+		this.lastCheckoutTime = 0;
 
 		this.customerFactory = new CustomerFactory();
 		this.checkoutQueue = new FIFO<Customer>();
@@ -78,6 +80,11 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
+	@Override
+	protected void setTime(double time) { // synligör setTime metoden för alla event
+		super.setTime(time);
+	}
+	
 	public int checkouts() {
 		return checkouts;
 	}
@@ -98,6 +105,7 @@ public class SupermarketState extends State {
 
 	protected void setClosed() { // kallas när starta stängnings-processen är klar
 		this.isClosing = false;
+		setChanged();
 	}
 
 	public boolean isAtCapacity() {
@@ -223,6 +231,15 @@ public class SupermarketState extends State {
 			queueingTime += amount;
 			setChanged();
 		}
+	}
+	
+	public double lastCheckoutTime() {
+		return this.lastCheckoutTime;
+	}
+	
+	protected void setLastCheckoutTime(double time) {
+		this.lastCheckoutTime = time;
+		setChanged();
 	}
 
 	public String queueToString() {

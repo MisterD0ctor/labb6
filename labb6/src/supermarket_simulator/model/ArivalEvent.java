@@ -19,6 +19,8 @@ public class ArivalEvent extends SupermarketEvent {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
+		
+		SupermarketState store = (SupermarketState) state;
 
 		if (!store.isOpen()) {
 			return; // Snabbköpet är stängt och inget nytt ankomstevent skapas
@@ -39,4 +41,5 @@ public class ArivalEvent extends SupermarketEvent {
 		// En ny kund anländer i framtiden
 		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
+	
 }

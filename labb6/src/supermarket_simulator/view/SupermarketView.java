@@ -59,9 +59,10 @@ public class SupermarketView extends View {
 		}
 	}
 
-	private void printResult(SupermarketState store) {
-		double avrageIdleCheckoutTime = store.idleCheckoutTime() / store.checkouts();
-		double avrageQueueingTime = store.queueingTime() / store.queuedCustomers();
+	private void printResult(SupermarketState state) {
+		double avrageIdleCheckoutTime = state.idleCheckoutTime() / state.checkouts();
+		double idleCheckoutTimePercent = avrageIdleCheckoutTime / state.lastCheckoutTime() * 100.0;
+		double avrageQueueingTime = state.queueingTime() / state.queuedCustomers();
 		System.out.printf(
 				"\r\nRESULTAT\r\n" 
 						+ "========\r\n" 
@@ -71,9 +72,9 @@ public class SupermarketView extends View {
 						+ "betalat). \r\n\r\n" 
 						+ "3) Total tid %d kunder tvingats köa: %.2f te.\r\n"
 						+ "Genomsnittlig kötid: %.2f te.",
-				store.attemptedVisits(), store.visits(), store.missedCustomers(), store.checkouts(),
-				store.idleCheckoutTime(), avrageIdleCheckoutTime, avrageIdleCheckoutTime / store.time() * 100.0,
-				store.queuedCustomers(), store.queueingTime(), avrageQueueingTime);
+					state.attemptedVisits(), state.visits(), state.missedCustomers(), state.checkouts(),
+					state.idleCheckoutTime(), avrageIdleCheckoutTime, idleCheckoutTimePercent,
+					state.queuedCustomers(), state.queueingTime(), avrageQueueingTime);
 	}
 
 	private String eventName(Event event) {

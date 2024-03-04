@@ -19,10 +19,13 @@ public class PayEvent extends SupermarketEvent {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
+		
+		SupermarketState store = (SupermarketState) state;
 
 		// En kund har betalat så antalet kunder i snabbköpet minskar med ett
 		store.decrementCustomers();
 		store.incrementVisits();
+		store.setLastCheckoutTime(this.time);
 
 		if (store.queueingCustomers() == 0) {
 			// Inga kunder står i kö så en kassa blir ledig

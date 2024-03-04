@@ -9,8 +9,6 @@ import generic_simulator.model.State;
  */
 public class SupermarketEvent extends Event {
 
-	protected SupermarketState store;
-
 	public SupermarketEvent(double time) {
 		super(time);
 	}
@@ -18,7 +16,7 @@ public class SupermarketEvent extends Event {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
-		this.store = (SupermarketState) state;
+		SupermarketState store = (SupermarketState) state;
 		
 		double deltaTime = (this.time - store.time()); // tids-deltan mellan förra och det nuvarande eventet
 		
@@ -26,11 +24,10 @@ public class SupermarketEvent extends Event {
 			store.incrementQueueingTime(deltaTime * store.queueingCustomers());
 			store.incrementIdleCheckoutTime(deltaTime * store.idleCheckouts());
 			
-			if (this.store.isClosing()) {
-				this.store.setClosed();
+			if (store.isClosing()) {
+				store.setClosed();
 			}
 		}
-		
 		super.execute(state, eventQueue);
 	}
 

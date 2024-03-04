@@ -21,6 +21,8 @@ public class PickEvent extends SupermarketEvent {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 
+		SupermarketState store = (SupermarketState) state;
+		
 		// Kontrollera om det finns lediga kassor
 		if (store.idleCheckouts() > 0) {
 			// Minskar antalet lediga kassor eftersom en till är upptagen nu

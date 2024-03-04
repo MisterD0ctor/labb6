@@ -14,7 +14,7 @@ public class StopEvent extends Event {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
-		state.notifyObservers(this);
+		super.execute(state, eventQueue);
 		state.stop();
 	}
 }
