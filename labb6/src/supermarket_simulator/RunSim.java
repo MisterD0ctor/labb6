@@ -6,6 +6,9 @@ import generic_simulator.model.StopEvent;
 import supermarket_simulator.model.*;
 import supermarket_simulator.view.SupermarketView;
 
+// Ex.1: 2 5 1.0 0.5 1.0 2.0 3.0 10.0 999.0 1234
+// Ex.2: 2 7 3.0 0.6 0.9 0.35 0.6 8.0 999.0 13
+
 /**
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */

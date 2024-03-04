@@ -14,26 +14,33 @@ import supermarket_simulator.model.SupermarketState;
 public class Optimize {
 
 	public static void main(String[] args) {
-		System.out.printf("PARAMETRAR\r\n" 
+		System.out.printf(
+				"PARAMETRAR\r\n" 
 						+ "==========\r\n" 
-						+ "Max som ryms, M..........: %d \r\n" 
-						+ "Ankomshastighet, lambda..: %.2f \r\n"
-						+ "Plocktider, [P_min..Pmax]: [%.2f..%.2f] \r\n" 
-						+ "Betaltider, [K_min..Kmax]: [%.2f..%.2f] \r\n"
-						+ "Frö, f...................: %d \r\n\r\n", K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
-						K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.SEED);
+						+ "Max som ryms, M..........: %d \r\n"
+						+ "Ankomshastighet, lambda..: %.2f \r\n" 
+						+ "Plocktider, [P_min..Pmax]: [%.2f..%.2f] \r\n"
+						+ "Betaltider, [K_min..Kmax]: [%.2f..%.2f] \r\n" 
+						+ "Frö, f...................: %d \r\n\r\n",
+				K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME,
+				K.SEED);
 		
+		System.out.printf("Stängning sker tiden %.1f och stophändelsen sker tiden %.1f. \r\n\r\n", K.END_TIME, K.STOP_TIME);
+
 		int optimalMissedCustomers = runSim(K.M, K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
 				K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED).missedCustomers();
 
 		if (args[0].equals("2")) {
 			int optimalCheckouts = Optimize.optimalCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
 					K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED);
+			
 			System.out.printf("Minsta antal kassor som ger minimalt antal missade (%d): %d", optimalMissedCustomers,
 					optimalCheckouts);
+			
 		} else if (args[0].equals("3")) {
 			int maxMinCheckouts = Optimize.highestMinimumCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME,
 					K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED);
+			
 			System.out.printf("Största minsta antal kassor som ger minimalt antal missade (%d): %d",
 					optimalMissedCustomers, maxMinCheckouts);
 		}

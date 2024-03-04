@@ -63,10 +63,13 @@ public class SupermarketView extends View {
 		double avrageIdleCheckoutTime = store.idleCheckoutTime() / store.checkouts();
 		double avrageQueueingTime = store.queueingTime() / store.queuedCustomers();
 		System.out.printf(
-				"\r\nRESULTAT\r\n" + "========\r\n" + "1) Av %d kunder handlade %d medan %d missades.\r\n"
-						+ "2) Total tid %d kassor varit lediga: %.2f te.\r\n"
+				"\r\nRESULTAT\r\n" 
+						+ "========\r\n" 
+						+ "1) Av %d kunder handlade %d medan %d missades.\r\n\r\n"
+						+ "2) Total tid %d kassor varit lediga: %.2f te.\r\n\r\n"
 						+ "Genomsnittlig ledig kassatid: %.2f te (dvs %.2f%% av tiden från öppning tills sista kunden "
-						+ "betalat).\r\n" + "3) Total tid %d kunder tvingats köa: %.2f te.\r\n"
+						+ "betalat). \r\n\r\n" 
+						+ "3) Total tid %d kunder tvingats köa: %.2f te.\r\n"
 						+ "Genomsnittlig kötid: %.2f te.",
 				store.attemptedVisits(), store.visits(), store.missedCustomers(), store.checkouts(),
 				store.idleCheckoutTime(), avrageIdleCheckoutTime, avrageIdleCheckoutTime / store.time() * 100.0,
