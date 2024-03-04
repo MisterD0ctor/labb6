@@ -20,9 +20,8 @@ public class ArivalEvent extends SupermarketEvent {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 
-		if (store.isClosed()) {
-			// Snabbköpet är stängt och inget nytt ankomstevent skapas
-			return;
+		if (!store.isOpen()) {
+			return; // Snabbköpet är stängt och inget nytt ankomstevent skapas
 		}
 
 		store.incrementAttemptedVisits(); // en kund försöker besöka snabbköpet

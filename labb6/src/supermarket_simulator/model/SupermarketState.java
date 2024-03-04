@@ -12,7 +12,9 @@ import supermarket_simulator.time.*;
 @SuppressWarnings("deprecation")
 public class SupermarketState extends State {
 
-	private boolean isClosed;
+	private boolean isOpen; // är snabbköpet öppet
+	private boolean isClosing; // Det ska vara sant vid ett eventet efter stänging och gör att sista
+								// beräkningen av kötid samt ledig-kassatid sker.
 
 	private final int checkouts; // antal öppna kassor
 	private final int customerCapacity; // maximalt antal kunder som får plats i snabbköpet
@@ -59,7 +61,8 @@ public class SupermarketState extends State {
 		this.pickTimeProvider = new UniformTimeProvider(this, minPickTime, maxPickTime, seed);
 		this.payTimeProvider = new UniformTimeProvider(this, minPayTime, maxPayTime, seed);
 
-		this.isClosed = false;
+		this.isOpen = true;
+		this.isClosing = false;
 		this.idleCheckouts = checkouts;
 		this.customers = 0;
 		this.visits = 0;
@@ -79,13 +82,22 @@ public class SupermarketState extends State {
 		return checkouts;
 	}
 
-	public boolean isClosed() {
-		return isClosed;
+	public boolean isOpen() {
+		return isOpen;
 	}
 
-	protected void close() {
-		isClosed = true;
+	protected void beginClosing() { // starta stängnings-processen
+		isOpen = false;
+		isClosing = true;
 		setChanged();
+	}
+
+	protected boolean isClosing() {
+		return isClosing;
+	}
+
+	protected void setClosed() { // kallas när starta stängnings-processen är klar
+		this.isClosing = false;
 	}
 
 	public boolean isAtCapacity() {

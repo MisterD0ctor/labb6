@@ -51,7 +51,7 @@ public class SupermarketView extends View {
 		if (event instanceof StartEvent || event instanceof StopEvent) {
 			System.out.printf("%6.2f %s \r\n", event.time(), eventName);
 		} else {
-			String open = state.isClosed() ? "S" : "Ö";
+			String open = state.isOpen() ? "Ö" : "S";
 			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", event.time(), eventName,
 					customerName(event), open, state.idleCheckouts(), state.idleCheckoutTime(), state.customers(),
 					state.visits(), state.missedCustomers(), state.queuedCustomers(), state.queueingTime(),

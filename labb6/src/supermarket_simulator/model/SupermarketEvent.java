@@ -19,12 +19,18 @@ public class SupermarketEvent extends Event {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		this.store = (SupermarketState) state;
-
-		double deltaTime = (this.time - store.time()); // tidsdeltan mellan förra och det nuvarande eventet
-
-		store.incrementQueueingTime(deltaTime * store.queueingCustomers());
-		store.incrementIdleCheckoutTime(deltaTime * store.idleCheckouts());
-
+		
+		double deltaTime = (this.time - store.time()); // tids-deltan mellan förra och det nuvarande eventet
+		
+		if (store.isOpen() || store.isClosing()) {
+			store.incrementQueueingTime(deltaTime * store.queueingCustomers());
+			store.incrementIdleCheckoutTime(deltaTime * store.idleCheckouts());
+			
+			if (this.store.isClosing()) {
+				this.store.setClosed();
+			}
+		}
+		
 		super.execute(state, eventQueue);
 	}
 

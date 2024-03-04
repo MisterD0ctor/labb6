@@ -15,7 +15,6 @@ public class CloseEvent extends SupermarketEvent {
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
-
-		store.close();
+		store.beginClosing();
 	}
 }

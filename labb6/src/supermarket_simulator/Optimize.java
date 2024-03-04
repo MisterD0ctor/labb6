@@ -12,6 +12,8 @@ import supermarket_simulator.model.SupermarketState;
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class Optimize {
+	
+	private static final int MIN_CONSECUTIVE_STABLE_RUNS = 100;
 
 	public static void main(String[] args) {
 		System.out.printf(
@@ -95,7 +97,7 @@ public class Optimize {
 		int highestMin = Integer.MIN_VALUE; // Initial highest minimum value
 		int consecutiveStableRuns = 0;
 
-		while (consecutiveStableRuns < 100) { // Loop until 100 consecutive stable iterations
+		while (consecutiveStableRuns < MIN_CONSECUTIVE_STABLE_RUNS) {
 			int min = optimalCheckouts(customerCapacity, arivalFrequency, minPickTime, maxPickTime, minPayTime,
 					maxPayTime, closeTime, stopTime, random.nextLong()); // Run methodtwo
 			if (min > highestMin) { // Check if new highest minimum found
@@ -105,6 +107,8 @@ public class Optimize {
 				consecutiveStableRuns++;
 			}
 		}
+		
+		
 
 		return highestMin;
 	}
