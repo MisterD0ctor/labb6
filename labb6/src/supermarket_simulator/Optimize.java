@@ -14,12 +14,32 @@ import supermarket_simulator.model.SupermarketState;
 public class Optimize {
 
 	public static void main(String[] args) {
-		if (args[0] == "test") {
-			System.out.print(Optimize.optimalCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED));			
+		System.out.printf("PARAMETRAR\r\n" 
+						+ "==========\r\n" 
+						+ "Max som ryms, M..........: %d \r\n" 
+						+ "Ankomshastighet, lambda..: %.2f \r\n"
+						+ "Plocktider, [P_min..Pmax]: [%.2f..%.2f] \r\n" 
+						+ "Betaltider, [K_min..Kmax]: [%.2f..%.2f] \r\n"
+						+ "Frö, f...................: %d \r\n\r\n", K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
+						K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.SEED);
+		
+		int optimalMissedCustomers = runSim(K.M, K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
+				K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED).missedCustomers();
+
+		if (args[0].equals("2")) {
+			int optimalCheckouts = Optimize.optimalCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
+					K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED);
+			System.out.printf("Minsta antal kassor som ger minimalt antal missade (%d): %d", optimalMissedCustomers,
+					optimalCheckouts);
+		} else if (args[0].equals("3")) {
+			int maxMinCheckouts = Optimize.highestMinimumCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME,
+					K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED);
+			System.out.printf("Största minsta antal kassor som ger minimalt antal missade (%d): %d",
+					optimalMissedCustomers, maxMinCheckouts);
 		}
-		System.out.print(Optimize.highestMin(K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED)); // vilka parametrar?????????
 	}
 
+	// Metod 1
 	public static SupermarketState runSim(int checkouts, int customerCapacity, double arivalFrequency,
 			double minPickTime, double maxPickTime, double minPayTime, double maxPayTime, double closeTime,
 			double stopTime, long seed) {
@@ -37,13 +57,15 @@ public class Optimize {
 		return state;
 	}
 
+	// Metod 2
 	public static int optimalCheckouts(int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, double closeTime, double stopTime, long seed) {
 		int checkouts = customerCapacity;
 		int optimalMissed = runSim(checkouts, customerCapacity, arivalFrequency, minPickTime, maxPickTime, minPayTime,
-				maxPayTime, closeTime, stopTime, seed).missedCustomers();
+				maxPayTime, closeTime, stopTime, seed).missedCustomers(); // vi kommer missa optimalt antal kunder när
+																			// N=M
 
-		int step = checkouts - 1; // optimala antalet kassor i intervallet [1, customerCapacity]
+		int step = checkouts - 1; // optimala antalet kassor finns i intervallet [1, customerCapacity]
 		int currentMissed;
 
 		while (step > 1) {
@@ -58,19 +80,22 @@ public class Optimize {
 		return checkouts;
 	}
 
-	// Metod 3 - ska starta highestMin.....
-
-	public static int highestMin(int customerCapacity, double arivalFrequency, double minPickTime, double maxPickTime,
-			double minPayTime, double maxPayTime, double closeTime, double stopTime, int f) {
+	// Metod 3
+	public static int highestMinimumCheckouts(int customerCapacity, double arivalFrequency, double minPickTime,
+			double maxPickTime, double minPayTime, double maxPayTime, double closeTime, double stopTime, int f) {
 
 		Random random = new Random(f);
 		int highestMin = Integer.MIN_VALUE; // Initial highest minimum value
+		int consecutiveStableRuns = 0;
 
-		for (int i = 0; i < 100; i++) { // Loop until 100 consecutive stable iterations
+		while (consecutiveStableRuns < 100) { // Loop until 100 consecutive stable iterations
 			int min = optimalCheckouts(customerCapacity, arivalFrequency, minPickTime, maxPickTime, minPayTime,
 					maxPayTime, closeTime, stopTime, random.nextLong()); // Run methodtwo
 			if (min > highestMin) { // Check if new highest minimum found
 				highestMin = min;
+				consecutiveStableRuns = 0;
+			} else {
+				consecutiveStableRuns++;
 			}
 		}
 
