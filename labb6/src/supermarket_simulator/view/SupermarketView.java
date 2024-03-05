@@ -52,15 +52,15 @@ public class SupermarketView extends View {
 			System.out.printf("%6.2f %s \r\n", event.time(), eventName);
 		} else {
 			String open = state.isOpen() ? "Ö" : "S";
-			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", event.time(), eventName,
-					customerName(event), open, state.idleCheckouts(), state.idleCheckoutTime(), state.customers(),
-					state.visits(), state.missedCustomers(), state.queuedCustomers(), state.queueingTime(),
-					state.queueingCustomers(), state.queueToString());
+			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", event.time(), 
+					eventName, customerName(event), open, state.idleCheckouts(), state.idleCheckoutTime(), 
+					state.customerCount(), state.visits(), state.missedCustomers(), state.queuedCustomers(), 
+					state.queueingTime(), state.queueingCustomers(), state.queueToString());
 		}
 	}
 
 	private void printResult(SupermarketState state) {
-		double avrageIdleCheckoutTime = state.idleCheckoutTime() / state.checkouts();
+		double avrageIdleCheckoutTime = state.idleCheckoutTime() / state.checkoutCount();
 		double idleCheckoutTimePercent = avrageIdleCheckoutTime / state.lastCheckoutTime() * 100.0;
 		double avrageQueueingTime = state.queueingTime() / state.queuedCustomers();
 		System.out.printf(
@@ -72,7 +72,7 @@ public class SupermarketView extends View {
 						+ "betalat). \r\n\r\n" 
 						+ "3) Total tid %d kunder tvingats köa: %.2f te.\r\n"
 						+ "Genomsnittlig kötid: %.2f te.",
-					state.attemptedVisits(), state.visits(), state.missedCustomers(), state.checkouts(),
+					state.attemptedVisits(), state.visits(), state.missedCustomers(), state.checkoutCount(),
 					state.idleCheckoutTime(), avrageIdleCheckoutTime, idleCheckoutTimePercent,
 					state.queuedCustomers(), state.queueingTime(), avrageQueueingTime);
 	}

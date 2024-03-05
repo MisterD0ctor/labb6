@@ -80,7 +80,7 @@ public class Optimize {
 
 		int step = checkouts - 1; // optimala antalet kassor finns i intervallet [1, customerCapacity]
 		int currentMissed;
-
+		
 		while (step > 1) { //Gör en binär sökning för att hitta minsta antalet kassor, som ger optimalt antal missade kunder...
 			step /= 2;
 			checkouts -= step;
