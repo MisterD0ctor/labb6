@@ -15,7 +15,7 @@ public class SupermarketEvent extends Event {
 
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
-		SupermarketState store = (SupermarketState) state;
+		SupermarketState store = (SupermarketState) state; //Ser till att state är ett SupermarketState
 		
 		double deltaTime = (this.time - store.time()); // tids-deltan mellan förra och det nuvarande eventet
 		
