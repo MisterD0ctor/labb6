@@ -29,16 +29,20 @@ public class Optimize {
 		
 		System.out.printf("Stängning sker tiden %.1f och stophändelsen sker tiden %.1f. \r\n\r\n", K.END_TIME, K.STOP_TIME);
 
+		//Kör simulationen med lika många kassor som det finns kunder, för att få det optimala antalet missade kunder...
 		int optimalMissedCustomers = runSim(K.M, K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
 				K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED).missedCustomers();
 
+		//Kollar ifall vi vill köra metod 2
 		if (args[0].equals("2")) {
 			int optimalCheckouts = Optimize.optimalCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME, K.HIGH_COLLECTION_TIME,
 					K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED);
 			
+		//Printar ut resultatet
 			System.out.printf("Minsta antal kassor som ger minimalt antal missade (%d): %d", optimalMissedCustomers,
 					optimalCheckouts);
 			
+		//Ifall argument = 3 kör metod 3	
 		} else if (args[0].equals("3")) {
 			int maxMinCheckouts = Optimize.highestMinimumCheckouts(K.M, K.L, K.LOW_COLLECTION_TIME,
 					K.HIGH_COLLECTION_TIME, K.LOW_PAYMENT_TIME, K.HIGH_PAYMENT_TIME, K.END_TIME, K.STOP_TIME, K.SEED);
@@ -77,7 +81,7 @@ public class Optimize {
 		int step = checkouts - 1; // optimala antalet kassor finns i intervallet [1, customerCapacity]
 		int currentMissed;
 
-		while (step > 1) {
+		while (step > 1) { //Gör en binär sökning för att hitta minsta antalet kassor, som ger optimalt antal missade kunder...
 			step /= 2;
 			checkouts -= step;
 			currentMissed = runSim(checkouts, customerCapacity, arivalFrequency, minPickTime, maxPickTime, minPayTime,
@@ -99,7 +103,7 @@ public class Optimize {
 
 		while (consecutiveStableRuns < MIN_CONSECUTIVE_STABLE_RUNS) {
 			int min = optimalCheckouts(customerCapacity, arivalFrequency, minPickTime, maxPickTime, minPayTime,
-					maxPayTime, closeTime, stopTime, random.nextLong()); // Run methodtwo
+					maxPayTime, closeTime, stopTime, random.nextLong()); // Run methodtwo med olika seed
 			if (min > highestMin) { // Check if new highest minimum found
 				highestMin = min;
 				consecutiveStableRuns = 0;

@@ -20,8 +20,8 @@ public class EventQueue {
 	}
 
 	protected Event dequeue() {
-		return queue.poll(); // Ta bort och returnera den första händelsen i kön //Ifall tom så returnerar
-								// den null
+		return queue.poll(); // Ta bort och returnera den första händelsen i kön 
+		//Ifall tom så returnerar den null
 	}
 
 	public boolean isEmpty() {

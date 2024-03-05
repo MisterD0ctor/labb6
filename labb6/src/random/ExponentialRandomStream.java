@@ -8,16 +8,16 @@ public class ExponentialRandomStream {
 	private double lambda;
 
 	public ExponentialRandomStream(double lambda, long seed) {
-		rand = new Random(seed);
-		this.lambda = lambda;
+		rand = new Random(seed); //Skapar en slumptalsgenerator av ett frö
+		this.lambda = lambda; //håller koll på frekvensen av ny slumptal
 	}
 
-	public ExponentialRandomStream(double lambda) {
+	public ExponentialRandomStream(double lambda) { //andra parametrar
 		rand = new Random();
 		this.lambda = lambda;
 	}
 
 	public double next() {
-		return -Math.log(rand.nextDouble()) / lambda;
+		return -Math.log(rand.nextDouble()) / lambda; //rand.nextdouble generar ett tal från 0->1 (flyttal)
 	}
 }

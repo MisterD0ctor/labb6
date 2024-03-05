@@ -11,7 +11,6 @@ public class StopEvent extends Event {
 		super(time); // Kallar på konstruktorn till Event
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);

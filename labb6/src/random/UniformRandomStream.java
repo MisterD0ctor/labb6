@@ -9,8 +9,8 @@ public class UniformRandomStream {
 
 	public UniformRandomStream(double lower, double upper, long seed) {
 		rand = new Random(seed);
-		this.lower = lower;
-		this.width = upper - lower;
+		this.lower = lower; //Lägsta talet som skall genereras
+		this.width = upper - lower; //Största talet - lägsta (avståndet)
 	}
 
 	public UniformRandomStream(double lower, double upper) {
@@ -20,6 +20,6 @@ public class UniformRandomStream {
 	}
 
 	public double next() {
-		return lower + rand.nextDouble() * width;
+		return lower + rand.nextDouble() * width; 
 	}
 }

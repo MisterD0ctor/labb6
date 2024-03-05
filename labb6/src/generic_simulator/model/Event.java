@@ -9,13 +9,13 @@ public class Event {
 	protected final double time;
 
 	public Event(double time) {
-		this.time = time;
+		this.time = time; //Hålla koll på vilken tid det är
 	}
 
 	@SuppressWarnings("deprecation")
 	public void execute(State state, EventQueue eventQueue) {
-		state.notifyObservers(this);
-		state.setTime(this.time);
+		state.notifyObservers(this); 
+		state.setTime(this.time); //Sätter tiden på det nya eventet
 	}
 
 	public double time() {
