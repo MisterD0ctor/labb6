@@ -13,7 +13,6 @@ public class SupermarketEvent extends Event {
 		super(time);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		SupermarketState store = (SupermarketState) state;
