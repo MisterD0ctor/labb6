@@ -23,7 +23,7 @@ public class PayEvent extends SupermarketEvent {
 		SupermarketState store = (SupermarketState) state;
 
 		// En kund har betalat så antalet kunder i snabbköpet minskar med ett
-		store.decrementCustomers();
+		store.decrementCustomerCount();
 		store.incrementVisits();
 		store.setLastCheckoutTime(this.time);
 
@@ -32,7 +32,7 @@ public class PayEvent extends SupermarketEvent {
 			store.incrementIdleCheckouts();
 		} else {
 			// (Minst) en kund står i kö så kassan blir genast ockuperad igen
-			Customer c = store.dequeueCustomer();
+			Customer c = store.dequeueCustomer(); // plocka första kunden från kassakön 
 			// Ett nytt betalningsevent skapas för den kund som stod först i kassakön
 			eventQueue.enqueue(new PayEvent(store.nextPayTime(), c));
 		}

@@ -21,13 +21,16 @@ public class SupermarketEvent extends Event {
 		double deltaTime = (this.time - store.time()); // tids-deltan mellan förra och det nuvarande eventet
 		
 		if (store.isOpen() || store.isClosing()) {
+			// öka tiden kunder har stått i kassakön
 			store.incrementQueueingTime(deltaTime * store.queueingCustomers());
+			// öka tiden kassorna har stått lediga
 			store.incrementIdleCheckoutTime(deltaTime * store.idleCheckouts());
 			
 			if (store.isClosing()) {
 				store.setClosed();
 			}
 		}
+		
 		super.execute(state, eventQueue);
 	}
 

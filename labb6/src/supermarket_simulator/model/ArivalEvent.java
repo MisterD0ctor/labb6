@@ -33,11 +33,11 @@ public class ArivalEvent extends SupermarketEvent {
 			store.incrementMissedCustomers();
 		} else {
 			// Det finns plats i snabbköpet och ett framtida ankomstevent skapas
-			store.incrementCustomers();
+			store.incrementCustomerCount();
 			// Ett framtida plockevent skapas för kunden som har anlänt
 			eventQueue.enqueue(new PickEvent(store.nextPickTime(), this.customer));
 		}
-
+		
 		// En ny kund anländer i framtiden
 		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}

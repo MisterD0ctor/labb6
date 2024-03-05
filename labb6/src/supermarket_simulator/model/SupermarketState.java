@@ -16,11 +16,11 @@ public class SupermarketState extends State {
 	private boolean isClosing; // Det ska vara sant vid ett eventet efter stänging och gör att sista
 								// beräkningen av kötid samt ledig-kassatid sker.
 
-	private final int checkouts; // antal öppna kassor
+	private final int checkoutCount; // antal öppna kassor
 	private final int customerCapacity; // maximalt antal kunder som får plats i snabbköpet
 
 	private int idleCheckouts; // antal lediga kassor
-	private int customers; // antal kunder i snabbköpet
+	private int customerCount; // antal kunder i snabbköpet
 	private int visits; // antal kunder som besökt snabbköpet och betalat
 	private int attemptedVisits; // antal kunder som försökt besökt snabbköpet
 	private int missedCustomers; // antalt missade kunder
@@ -36,11 +36,11 @@ public class SupermarketState extends State {
 	private final UniformTimeProvider pickTimeProvider; // genererar tider för plockevent
 	private final UniformTimeProvider payTimeProvider; // genererar tider för betalningsevent
 
-	public SupermarketState(int checkouts, int customerCapacity, double arivalFrequency, double minPickTime,
+	public SupermarketState(int checkoutCount, int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
 
 		// Kontrollera att alla parametrar är giltiga
-		if (checkouts < 1) {
+		if (checkoutCount < 1) {
 			throw new IllegalArgumentException("openCheckouts must be > 0");
 		} else if (customerCapacity < 1) {
 			throw new IllegalArgumentException("customerCapacity must be > 0");
@@ -56,7 +56,7 @@ public class SupermarketState extends State {
 			throw new IllegalArgumentException("maxPayTime must be > 0");
 		}
 
-		this.checkouts = checkouts;
+		this.checkoutCount = checkoutCount;
 		this.customerCapacity = customerCapacity;
 		this.arivalTimeProvider = new ExponentialTimeProvider(this, arivalFrequency, seed);
 		this.pickTimeProvider = new UniformTimeProvider(this, minPickTime, maxPickTime, seed);
@@ -64,8 +64,8 @@ public class SupermarketState extends State {
 
 		this.isOpen = true;
 		this.isClosing = false;
-		this.idleCheckouts = checkouts;
-		this.customers = 0;
+		this.idleCheckouts = checkoutCount;
+		this.customerCount = 0;
 		this.visits = 0;
 		this.attemptedVisits = 0;
 		this.missedCustomers = 0;
@@ -85,8 +85,8 @@ public class SupermarketState extends State {
 		super.setTime(time);
 	}
 	
-	public int checkouts() {
-		return checkouts;
+	public int checkoutCount() {
+		return checkoutCount;
 	}
 
 	public boolean isOpen() {
@@ -109,28 +109,28 @@ public class SupermarketState extends State {
 	}
 
 	public boolean isAtCapacity() {
-		return customerCapacity <= customers;
+		return customerCapacity <= customerCount;
 	}
 
-	public int customers() {
-		return customers;
+	public int customerCount() {
+		return customerCount;
 	}
 
-	protected void incrementCustomers() throws IllegalStateException { // ökar antalet kunder i snabbköpet med ett
+	protected void incrementCustomerCount() throws IllegalStateException { // ökar antalet kunder i snabbköpet med ett
 		if (isAtCapacity()) {
 			throw new IllegalStateException("supermarket already at capacity");
 		} else {
-			customers++;
+			customerCount++;
 			setChanged();
 		}
 
 	}
 
-	protected void decrementCustomers() throws IllegalStateException {
-		if (customers <= 0) {
+	protected void decrementCustomerCount() throws IllegalStateException {
+		if (customerCount <= 0) {
 			throw new IllegalStateException("supermarket already empty");
 		} else {
-			customers--;
+			customerCount--;
 			setChanged();
 		}
 	}
@@ -141,7 +141,7 @@ public class SupermarketState extends State {
 
 	protected void incrementIdleCheckouts() throws IllegalStateException { // när en kund lämnar till en kassa
 		// antalet lediga kassor ska inte få vara fler än totala antalet kassor
-		if (idleCheckouts == checkouts) {
+		if (idleCheckouts == checkoutCount) {
 			throw new IllegalStateException("max number of checkouts are already idle");
 		} else {
 			idleCheckouts++;
