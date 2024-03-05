@@ -40,9 +40,9 @@ public class SupermarketState extends State {
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
 
 		// Kontrollera att alla parametrar är giltiga
-		if (checkoutCount < 1) {
+		if (checkoutCount <= 0) {
 			throw new IllegalArgumentException("openCheckouts must be > 0");
-		} else if (customerCapacity < 1) {
+		} else if (customerCapacity <= 0) {
 			throw new IllegalArgumentException("customerCapacity must be > 0");
 		} else if (arivalFrequency <= 0) {
 			throw new IllegalArgumentException("arivalFrequency must be > 0");
