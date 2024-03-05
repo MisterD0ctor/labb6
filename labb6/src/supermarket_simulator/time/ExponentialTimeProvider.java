@@ -12,8 +12,8 @@ public class ExponentialTimeProvider {
 	private State state;
 
 	public ExponentialTimeProvider(State state, double lambda, long seed) {
-		stream = new ExponentialRandomStream(lambda, seed);
-		this.state = state;
+		stream = new ExponentialRandomStream(lambda, seed); //Sparar ner frekvens och frö
+		this.state = state; // För att vi ska kunna använda state.time 
 	}
 
 	public double next() {

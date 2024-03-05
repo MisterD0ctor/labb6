@@ -12,6 +12,6 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return Integer.toString(id);
+		return Integer.toString(id); // Returnerar kundens id som en sträng
 	}
 }

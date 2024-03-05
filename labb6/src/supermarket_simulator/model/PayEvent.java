@@ -20,7 +20,7 @@ public class PayEvent extends SupermarketEvent {
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
 		
-		SupermarketState store = (SupermarketState) state;
+		SupermarketState store = (SupermarketState) state; 
 
 		// En kund har betalat så antalet kunder i snabbköpet minskar med ett
 		store.decrementCustomerCount();

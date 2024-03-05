@@ -14,7 +14,7 @@ import supermarket_simulator.model.*;
 public class SupermarketView extends View {
 
 	public SupermarketView(int openCheckouts, int customerCapacity, double arivalFrequency, double minPickTime,
-			double maxPickTime, double minPayTime, double maxPayTime, long seed) {
+			double maxPickTime, double minPayTime, double maxPayTime, long seed) { // Samma parametrar som i SupermarketState
 
 		System.out.printf(
 				"PARAMETRAR\r\n" 
@@ -33,27 +33,27 @@ public class SupermarketView extends View {
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		SupermarketState state = (SupermarketState) o;
-		Event event = (Event) arg;
+	public void update(Observable o, Object arg) { // Skickar in Eventet som argument, o är supermarketstate.
+		SupermarketState state = (SupermarketState) o; // Kolla att o är supermarketstate
+		Event event = (Event) arg; // Kolla att arg är ett event
 
-		printEvent(event, state);
+		printEvent(event, state); 
 
-		if (event instanceof StopEvent) {
+		if (event instanceof StopEvent) { 
 			printResult(state);
 		}
 
 	}
 
 	private void printEvent(Event event, SupermarketState state) {
-		String eventName = eventName(event);
+		String eventName = getEventName(event);
 
 		if (event instanceof StartEvent || event instanceof StopEvent) {
 			System.out.printf("%6.2f %s \r\n", event.time(), eventName);
 		} else {
-			String open = state.isOpen() ? "Ö" : "S";
+			String open = state.isOpen() ? "Ö" : "S"; // Ifall öppet = ö, annars stängt = s
 			System.out.printf("%6.2f %-9s %4s  %s %4d %7.2f %4d %5d %5d %6d %7.2f %6d  %s\r\n", event.time(), 
-					eventName, customerName(event), open, state.idleCheckouts(), state.idleCheckoutTime(), 
+					eventName, getCustomerName(event), open, state.idleCheckouts(), state.idleCheckoutTime(), 
 					state.customerCount(), state.visits(), state.missedCustomers(), state.queuedCustomers(), 
 					state.queueingTime(), state.queueingCustomers(), state.queueToString());
 		}
@@ -77,7 +77,7 @@ public class SupermarketView extends View {
 					state.queuedCustomers(), state.queueingTime(), avrageQueueingTime);
 	}
 
-	private String eventName(Event event) {
+	private String getEventName(Event event) {
 		if (event instanceof StartEvent) {
 			return "Start";
 		} else if (event instanceof ArivalEvent) {
@@ -95,7 +95,7 @@ public class SupermarketView extends View {
 		}
 	}
 
-	private String customerName(Event event) {
+	private String getCustomerName(Event event) {
 		if (event instanceof ArivalEvent) {
 			return ((ArivalEvent) event).customer.toString();
 		} else if (event instanceof PickEvent) {

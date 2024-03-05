@@ -56,13 +56,13 @@ public class SupermarketState extends State {
 			throw new IllegalArgumentException("maxPayTime must be > 0");
 		}
 
-		this.checkoutCount = checkoutCount;
+		this.checkoutCount = checkoutCount; //Tar variabeln från parametern och sparar den i tillståndsvariabeln, Den mörkblåa försvinner efter konstruktorn.
 		this.customerCapacity = customerCapacity;
 		this.arivalTimeProvider = new ExponentialTimeProvider(this, arivalFrequency, seed);
 		this.pickTimeProvider = new UniformTimeProvider(this, minPickTime, maxPickTime, seed);
 		this.payTimeProvider = new UniformTimeProvider(this, minPayTime, maxPayTime, seed);
 
-		this.isOpen = true;
+		this.isOpen = true; //Annars får vi inga nya arrivals
 		this.isClosing = false;
 		this.idleCheckouts = checkoutCount;
 		this.customerCount = 0;
@@ -85,21 +85,21 @@ public class SupermarketState extends State {
 		super.setTime(time);
 	}
 	
-	public int checkoutCount() {
+	public int checkoutCount() { //För att man ska kunna se värdet
 		return checkoutCount;
 	}
 
-	public boolean isOpen() {
+	public boolean isOpen() { //För att man ska kunna se värdet
 		return isOpen;
 	}
 
 	protected void beginClosing() { // starta stängnings-processen
 		isOpen = false;
 		isClosing = true;
-		setChanged();
+		setChanged(); //För att SupermarketState är Observable av SuperMarketView
 	}
 
-	protected boolean isClosing() {
+	protected boolean isClosing() { //Alla klasser i Supermarket_Simulator.model kan komma åt funktionen
 		return isClosing;
 	}
 
@@ -115,7 +115,11 @@ public class SupermarketState extends State {
 	public int customerCount() {
 		return customerCount;
 	}
-
+	
+	/**
+	 * 
+	 * @throws IllegalStateException When the supermarket is at max capacity
+	 */
 	protected void incrementCustomerCount() throws IllegalStateException { // ökar antalet kunder i snabbköpet med ett
 		if (isAtCapacity()) {
 			throw new IllegalStateException("supermarket already at capacity");
@@ -126,6 +130,10 @@ public class SupermarketState extends State {
 
 	}
 
+	/**
+	 * 
+	 * @throws IllegalStateException When the amount of costumers is zero or less
+	 */
 	protected void decrementCustomerCount() throws IllegalStateException {
 		if (customerCount <= 0) {
 			throw new IllegalStateException("supermarket already empty");
@@ -139,6 +147,10 @@ public class SupermarketState extends State {
 		return idleCheckouts;
 	}
 
+	/**
+	 * 
+	 * @throws IllegalStateException When the all the checkouts are already idle
+	 */
 	protected void incrementIdleCheckouts() throws IllegalStateException { // när en kund lämnar till en kassa
 		// antalet lediga kassor ska inte få vara fler än totala antalet kassor
 		if (idleCheckouts == checkoutCount) {
@@ -150,6 +162,10 @@ public class SupermarketState extends State {
 
 	}
 
+	/**
+	 * 
+	 * @throws IllegalStateException When all the checkouts are already in use
+	 */
 	protected void decrementIdleCheckouts() throws IllegalStateException { // när en kund går till en kassa
 		// antalet lediga kassor ska inte få vara mindre än noll
 		if (idleCheckouts == 0) {
@@ -165,7 +181,7 @@ public class SupermarketState extends State {
 		return visits;
 	}
 
-	protected void incrementVisits() {
+	protected void incrementVisits() { //Ökar antalet kunder som betalat med 1
 		visits++;
 		setChanged();
 	}
@@ -185,7 +201,7 @@ public class SupermarketState extends State {
 
 	protected void incrementMissedCustomers() {
 		missedCustomers++;
-		setChanged();
+		setChanged(); // För att de nya uppdateringarna ska märkas
 	}
 
 	protected void enqueueCustomer(Customer customer) { // lägg till en kund i kassakön
@@ -194,16 +210,16 @@ public class SupermarketState extends State {
 		setChanged();
 	}
 
-	protected Customer dequeueCustomer() { // kund går till en kassa
+	protected Customer dequeueCustomer() { // Hämtar och tar bort första kunden i kassakön
 		setChanged();
 		return checkoutQueue.dequeue();
 	}
 
-	public int queuedCustomers() {
+	public int queuedCustomers() { //Antalet kunder som har stått i kö
 		return queuedCustomers;
 	}
 
-	public int queueingCustomers() {
+	public int queueingCustomers() { //Antalet kunder som köar
 		return checkoutQueue.size();
 	}
 
@@ -211,6 +227,10 @@ public class SupermarketState extends State {
 		return idleCheckoutTime;
 	}
 
+	/**
+	 * 
+	 * @throws IllegalArgumentException When amount is negative
+	 */
 	protected void incrementIdleCheckoutTime(double amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("amount must be positive");
@@ -224,6 +244,10 @@ public class SupermarketState extends State {
 		return queueingTime;
 	}
 
+	/**
+	 * 
+	 * @throws IllegalArgumentException When amount is negative
+	 */
 	protected void incrementQueueingTime(double amount) throws IllegalArgumentException {
 		if (amount < 0) {
 			throw new IllegalArgumentException("amount must be positive");
@@ -253,15 +277,15 @@ public class SupermarketState extends State {
 
 	protected double nextArivalTime() {
 		setChanged();
-		return arivalTimeProvider.next();
+		return arivalTimeProvider.next(); // Genererar vilken tid nästa ArrivalEvent skall ske
 	}
 
 	protected double nextPickTime() {
 		setChanged();
-		return pickTimeProvider.next();
+		return pickTimeProvider.next(); // Genererar vilken tid nästa PickEvent skall ske
 	}
 
-	protected double nextPayTime() {
+	protected double nextPayTime() { // Genererar vilken tid nästa PayEvent skall ske
 		setChanged();
 		return payTimeProvider.next();
 	}

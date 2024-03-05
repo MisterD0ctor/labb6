@@ -2,7 +2,7 @@ package random;
 
 import java.util.Random;
 
-public class ExponentialRandomStream {
+public class ExponentialRandomStream { // Används av ExponentialTimeProvider --> ArrivalEvent
 
 	private Random rand;
 	private double lambda;
@@ -12,7 +12,7 @@ public class ExponentialRandomStream {
 		this.lambda = lambda; //håller koll på frekvensen av ny slumptal
 	}
 
-	public ExponentialRandomStream(double lambda) { //andra parametrar
+	public ExponentialRandomStream(double lambda) { //OBS! Vi kallar aldrig på denna...
 		rand = new Random();
 		this.lambda = lambda;
 	}
