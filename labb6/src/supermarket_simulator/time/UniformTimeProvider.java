@@ -11,6 +11,13 @@ public class UniformTimeProvider {
 	private UniformRandomStream stream;
 	private State state;
 
+	/**
+	 * 
+	 * @param state
+	 * @param minTime
+	 * @param maxTime
+	 * @param seed
+	 */
 	public UniformTimeProvider(State state, double minTime, double maxTime, long seed) {
 		stream = new UniformRandomStream(minTime, maxTime, seed);
 		this.state = state;

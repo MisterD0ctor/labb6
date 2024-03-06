@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * The generic View class that observes a State
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 @SuppressWarnings("deprecation")

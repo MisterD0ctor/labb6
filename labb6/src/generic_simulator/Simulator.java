@@ -4,6 +4,7 @@ import generic_simulator.model.Event;
 import generic_simulator.model.State;
 
 /**
+ * 
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class Simulator {
@@ -15,6 +16,9 @@ public class Simulator {
 		this.eventQueue = eventQueue; // För att vi vill kunna välja vilka event som ska finnas i eventkön från början
 	}
 
+	/**
+	 * Starts the simulation
+	 */
 	public void run() {
 		while (state.isRunning() && !eventQueue.isEmpty()) {
 			Event event = eventQueue.dequeue(); // plockar event från eventqueue via dequeue för att sedan köra dem

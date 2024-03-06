@@ -13,7 +13,6 @@ public class ExponentialTimeProvider {
 	private State state;
 
 	/**
-	 * 
 	 * @param state The state used as a referece point for future times
 	 * @param lambda The avrage frequecy of new times
 	 * @param seed The seed used for generation of random times
