@@ -57,21 +57,21 @@ public class Optimize {
 					optimalMissedCustomers, maxMinCheckouts);
 		}
 	}
-/**
- * Runs a simulation of a supermarket with the given arguments
- * @param checkouts number of available checkouts 
- * @param customerCapacity maximal amounts of customers in the store 
- * @param arivalFrequency maximal amounts of customers in the store 
- * @param minPickTime smallest pick time available
- * @param maxPickTime highest pick time available
- * @param minPayTime smallest pay time available
- * @param maxPayTime highest pay time available
- * @param closeTime time when store closes
- * @param stopTime time when simulation stops
- * @param seed long randomized number that gives a output based on the value 
- * @return state that optimalCheckouts uses
- */
-	// Metod 1
+	
+	/**
+	 * Runs a simulation of a supermarket with the given arguments
+	 * @param checkouts number of available checkouts 
+	 * @param customerCapacity maximal amounts of customers in the store 
+	 * @param arivalFrequency maximal amounts of customers in the store 
+	 * @param minPickTime smallest pick time available
+	 * @param maxPickTime highest pick time available
+	 * @param minPayTime smallest pay time available
+	 * @param maxPayTime highest pay time available
+	 * @param closeTime time when store closes
+	 * @param stopTime time when simulation stops
+	 * @param seed long randomized number that gives a output based on the value 
+	 * @return state that optimalCheckouts uses
+	 */
 	public static SupermarketState runSim(int checkouts, int customerCapacity, double arivalFrequency,
 			double minPickTime, double maxPickTime, double minPayTime, double maxPayTime, double closeTime,
 			double stopTime, long seed) {
@@ -88,6 +88,7 @@ public class Optimize {
 		sim.run();
 		return state;
 	}
+	
 	/**
 	 * Finds the smallest amount of checkouts for the biggest amount of customers
 	 * @param customerCapacity number of available checkouts
@@ -101,8 +102,6 @@ public class Optimize {
 	 * @param seed long randomized number that gives a output based on the value 
 	 * @return checkouts, smallest amount of checkouts for the biggest amount of customers
 	 */
-
-	// Metod 2
 	public static int optimalCheckouts(int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, double closeTime, double stopTime, long seed) {
 		int checkouts = customerCapacity;
@@ -124,20 +123,20 @@ public class Optimize {
 		}
 		return checkouts;
 	}
-/**
- * Finds the highest value that optimalCheckouts returns, with randomized seeds each time
- * @param customerCapacity number of available checkouts
- * @param arivalFrequency maximal amounts of customers in the store 
- * @param minPickTime smallest pick time available
- * @param maxPickTime highest pick time available
- * @param minPayTime smallest pay time available
- * @param maxPayTime highest pay time available
- * @param closeTime time when store closes
- * @param stopTime time when simulation stops
- * @param f variable for randomized seed
- * @return highestMin, highest value that optimalCheckouts gets
- */
-	// Metod 3
+	
+	/**
+	 * Finds the highest value that optimalCheckouts returns, with randomized seeds each time
+     * @param customerCapacity The maximal number of customers allowd in the supermarket
+     * @param arivalFrequency The average frequency of costumer arrivals
+     * @param minPickTime The shortest time a customer can take to pick their products
+     * @param maxPickTime The longest time a customer can take to pick their products
+     * @param minPayTime The shortest time a customer can take to pay for their products
+     * @param maxPayTime The longest time a customer can take to pay for their products
+	 * @param closeTime time when store closes
+	 * @param stopTime time when simulation stops
+	 * @param f The seed used for random number generation
+	 * @return highestMin An estimation highest value that optimalCheckouts could return for any seed
+	 */
 	public static int highestMinimumCheckouts(int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, double closeTime, double stopTime, int f) {
 
