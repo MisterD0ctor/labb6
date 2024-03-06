@@ -5,6 +5,7 @@ import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 /**
+ * This represents the event of a costumer paying and leaving the supermarket
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class PayEvent extends SupermarketEvent {

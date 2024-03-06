@@ -6,6 +6,7 @@ import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 /**
+ * This represents the event of a costumer picking their groceries and then going to a checkout
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class PickEvent extends SupermarketEvent {

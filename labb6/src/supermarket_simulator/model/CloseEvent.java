@@ -4,6 +4,7 @@ import generic_simulator.EventQueue;
 import generic_simulator.model.State;
 
 /**
+ * This represents the event of the supermarket closing 
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class CloseEvent extends SupermarketEvent {

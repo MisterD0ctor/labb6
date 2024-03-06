@@ -5,7 +5,7 @@ import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 /**
- * This presents the event of a costumer arriving to the supermarket
+ * This represents the event of a costumer arriving to the supermarket
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class ArivalEvent extends SupermarketEvent {
