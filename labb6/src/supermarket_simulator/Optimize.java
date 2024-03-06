@@ -58,7 +58,7 @@ public class Optimize {
 		}
 	}
 /**
- * 
+ * Runs a simulation of a supermarket with the given arguments
  * @param checkouts number of available checkouts 
  * @param customerCapacity maximal amounts of customers in the store 
  * @param arivalFrequency maximal amounts of customers in the store 
@@ -69,7 +69,7 @@ public class Optimize {
  * @param closeTime time when store closes
  * @param stopTime time when simulation stops
  * @param seed long randomized number that gives a output based on the value 
- * @return state
+ * @return state that optimalCheckouts uses
  */
 	// Metod 1
 	public static SupermarketState runSim(int checkouts, int customerCapacity, double arivalFrequency,
