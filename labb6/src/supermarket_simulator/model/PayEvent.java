@@ -5,17 +5,26 @@ import generic_simulator.model.State;
 import supermarket_simulator.customers.Customer;
 
 /**
+ * This represents the event of a costumer paying and leaving the supermarket
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class PayEvent extends SupermarketEvent {
 
 	private final Customer customer;
 
+	/**
+	 * @param time The time where this event is supposed to happen
+	 * @param customer The costumer that is arriving
+	 */
 	public PayEvent(double time, Customer customer) {
 		super(time);
 		this.customer = customer;
 	}
 
+	/**
+	 * @param state The state execute effects
+	 * @param eventQueue The queue that new events created by this method are added to
+	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);

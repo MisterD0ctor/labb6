@@ -13,6 +13,7 @@ import supermarket_simulator.model.SupermarketState;
  */
 public class Optimize {
 	
+	
 	private static final int MIN_CONSECUTIVE_STABLE_RUNS = 100;
 
 	public static void main(String[] args) {
@@ -51,7 +52,20 @@ public class Optimize {
 					optimalMissedCustomers, maxMinCheckouts);
 		}
 	}
-
+/**
+ * 
+ * @param checkouts number of available checkouts 
+ * @param customerCapacity maximal amounts of customers in the store 
+ * @param arivalFrequency maximal amounts of customers in the store 
+ * @param minPickTime smallest pick time available
+ * @param maxPickTime highest pick time available
+ * @param minPayTime smallest pay time available
+ * @param maxPayTime highest pay time available
+ * @param closeTime time when store closes
+ * @param stopTime time when simulation stops
+ * @param seed long randomized number that gives a output based on the value 
+ * @return state
+ */
 	// Metod 1
 	public static SupermarketState runSim(int checkouts, int customerCapacity, double arivalFrequency,
 			double minPickTime, double maxPickTime, double minPayTime, double maxPayTime, double closeTime,
@@ -69,6 +83,19 @@ public class Optimize {
 		sim.run();
 		return state;
 	}
+	/**
+	 * 
+	 * @param customerCapacity number of available checkouts
+	 * @param arivalFrequency maximal amounts of customers in the store 
+	 * @param minPickTime smallest pick time available
+     * @param maxPickTime highest pick time available
+     * @param minPayTime smallest pay time available
+     * @param maxPayTime highest pay time available
+     * @param closeTime time when store closes
+     * @param stopTime time when simulation stops
+	 * @param seed long randomized number that gives a output based on the value 
+	 * @return checkouts, smallest amount of checkouts for the biggest amount of customers
+	 */
 
 	// Metod 2
 	public static int optimalCheckouts(int customerCapacity, double arivalFrequency, double minPickTime,
@@ -92,7 +119,19 @@ public class Optimize {
 		}
 		return checkouts;
 	}
-
+/**
+ * 
+ * @param customerCapacity number of available checkouts
+ * @param arivalFrequency maximal amounts of customers in the store 
+ * @param minPickTime smallest pick time available
+ * @param maxPickTime highest pick time available
+ * @param minPayTime smallest pay time available
+ * @param maxPayTime highest pay time available
+ * @param closeTime time when store closes
+ * @param stopTime time when simulation stops
+ * @param f variable for randomized seed
+ * @return highestMin, highest value that optimalCheckouts gets
+ */
 	// Metod 3
 	public static int highestMinimumCheckouts(int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, double closeTime, double stopTime, int f) {
