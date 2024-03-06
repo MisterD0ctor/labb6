@@ -13,6 +13,17 @@ import supermarket_simulator.model.*;
 @SuppressWarnings("deprecation")
 public class SupermarketView extends View {
 
+	/**
+	 * 
+     * @param openCheckouts The number of open checkouts
+     * @param customerCapacity The maximal number of customers allowd in the supermarket
+     * @param arivalFrequency The average frequency of costumer arrivals
+     * @param minPickTime The shortest time a customer can take to pick their products
+     * @param maxPickTime The longest time a customer can take to pick their products
+     * @param minPayTime The shortest time a customer can take to pay for their products
+     * @param maxPayTime The longest time a customer can take to pay for their products
+     * @param seed The seed used for random number generation
+	 */
 	public SupermarketView(int openCheckouts, int customerCapacity, double arivalFrequency, double minPickTime,
 			double maxPickTime, double minPayTime, double maxPayTime, long seed) { // Samma parametrar som i SupermarketState
 

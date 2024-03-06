@@ -10,6 +10,10 @@ public class CustomerFactory {
 		customerCount = 0;
 	}
 
+	/**
+	 * 
+	 * @return A new customer with a unique id
+	 */
 	public Customer getCustomer() {
 		return new Customer(customerCount++);
 	}

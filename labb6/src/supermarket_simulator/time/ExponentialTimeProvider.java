@@ -4,7 +4,7 @@ import random.ExponentialRandomStream;
 import generic_simulator.model.State;
 
 /**
- * Provides new random points in time that events should happen
+ * Provides new random points in time based on a frequency
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class ExponentialTimeProvider {
