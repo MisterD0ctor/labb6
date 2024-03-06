@@ -10,7 +10,7 @@ import supermarket_simulator.customers.Customer;
  */
 public class PickEvent extends SupermarketEvent {
 
-	public final Customer customer;
+	private final Customer customer;
 
 	public PickEvent(double time, Customer customer) {
 		super(time);
@@ -33,5 +33,9 @@ public class PickEvent extends SupermarketEvent {
 			// Alla kassor är upptagna, ställ kunden i kassakön
 			store.enqueueCustomer(customer);
 		}
+	}
+	
+	public Customer getCustomer() {
+		return this.customer;
 	}
 }

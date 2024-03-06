@@ -9,7 +9,7 @@ import supermarket_simulator.customers.Customer;
  */
 public class ArivalEvent extends SupermarketEvent {
 
-	public final Customer customer;
+	private final Customer customer;
 
 	public ArivalEvent(double time, Customer customer) {
 		super(time);
@@ -40,6 +40,10 @@ public class ArivalEvent extends SupermarketEvent {
 		
 		// En ny kund anländer i framtiden
 		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
+	}
+	
+	public Customer getCustomer() {
+		return this.customer;
 	}
 	
 }

@@ -97,11 +97,11 @@ public class SupermarketView extends View {
 
 	private String getCustomerName(Event event) {
 		if (event instanceof ArivalEvent) {
-			return ((ArivalEvent) event).customer.toString();
+			return ((ArivalEvent) event).getCustomer().toString();
 		} else if (event instanceof PickEvent) {
-			return ((PickEvent) event).customer.toString();
+			return ((PickEvent) event).getCustomer().toString();
 		} else if (event instanceof PayEvent) {
-			return ((PayEvent) event).customer.toString();
+			return ((PayEvent) event).getCustomer().toString();
 		} else if (event instanceof CloseEvent) {
 			return "---";
 		} else {
