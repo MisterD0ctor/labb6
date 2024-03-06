@@ -9,6 +9,7 @@ import generic_simulator.model.State;
 public class StartEvent extends SupermarketEvent {
 
 	/**
+	 * 
 	 * @param time The time where this event is supposed to happen
 	 */
 	public StartEvent(double time) {
