@@ -51,6 +51,10 @@ public class ArivalEvent extends SupermarketEvent {
 		eventQueue.enqueue(new ArivalEvent(store.nextArivalTime(), store.newCustomer()));
 	}
 	
+	/**
+	 * 
+	 * @return the costumer of this event
+	 */
 	public Customer getCustomer() {
 		return this.customer;
 	}
