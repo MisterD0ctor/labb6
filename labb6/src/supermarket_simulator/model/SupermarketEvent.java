@@ -5,10 +5,15 @@ import generic_simulator.model.Event;
 import generic_simulator.model.State;
 
 /**
+ * This is the parentclass of all the events of the supermarket
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class SupermarketEvent extends Event {
 
+	/**
+	 * 
+	 * @param time The time where this event is supposed to happen
+	 */
 	public SupermarketEvent(double time) {
 		super(time);
 	}

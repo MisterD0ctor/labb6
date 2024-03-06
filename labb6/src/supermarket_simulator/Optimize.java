@@ -15,6 +15,11 @@ public class Optimize {
 	
 	
 	private static final int MIN_CONSECUTIVE_STABLE_RUNS = 100;
+	/**
+	 * 
+	 * Prints the parameters and results
+	 * Different parameters test different methods which the test-program contains
+	 */
 
 	public static void main(String[] args) {
 		System.out.printf(
@@ -53,7 +58,7 @@ public class Optimize {
 		}
 	}
 /**
- * 
+ * Runs a simulation of a supermarket with the given arguments
  * @param checkouts number of available checkouts 
  * @param customerCapacity maximal amounts of customers in the store 
  * @param arivalFrequency maximal amounts of customers in the store 
@@ -64,7 +69,7 @@ public class Optimize {
  * @param closeTime time when store closes
  * @param stopTime time when simulation stops
  * @param seed long randomized number that gives a output based on the value 
- * @return state
+ * @return state that optimalCheckouts uses
  */
 	// Metod 1
 	public static SupermarketState runSim(int checkouts, int customerCapacity, double arivalFrequency,
@@ -84,7 +89,7 @@ public class Optimize {
 		return state;
 	}
 	/**
-	 * 
+	 * Finds the smallest amount of checkouts for the biggest amount of customers
 	 * @param customerCapacity number of available checkouts
 	 * @param arivalFrequency maximal amounts of customers in the store 
 	 * @param minPickTime smallest pick time available
@@ -120,7 +125,7 @@ public class Optimize {
 		return checkouts;
 	}
 /**
- * 
+ * Finds the highest value that optimalCheckouts returns, with randomized seeds each time
  * @param customerCapacity number of available checkouts
  * @param arivalFrequency maximal amounts of customers in the store 
  * @param minPickTime smallest pick time available

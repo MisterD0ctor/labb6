@@ -22,10 +22,6 @@ public class PickEvent extends SupermarketEvent {
 		this.customer = customer;
 	}
 
-	/**
-	 * @param state The state execute effects
-	 * @param eventQueue The queue that new events created by this method are added to
-	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);
@@ -44,6 +40,10 @@ public class PickEvent extends SupermarketEvent {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return costumer the costumer of this event
+	 */
 	public Customer getCustomer() {
 		return this.customer;
 	}

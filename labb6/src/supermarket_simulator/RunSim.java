@@ -10,10 +10,11 @@ import supermarket_simulator.view.SupermarketView;
 // Ex.2: 2 7 3.0 0.6 0.9 0.35 0.6 8.0 999.0 13
 
 /**
+ * Runs a simulation of a supermarket with the given arguments
  * @author David Sämfors, Ludvig Pernsköld, Kasper Axelsson & Zeb Muhlbach
  */
 public class RunSim {
-
+	
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
