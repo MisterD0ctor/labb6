@@ -21,10 +21,6 @@ public class ArivalEvent extends SupermarketEvent {
 		this.customer = customer;
 	}
 
-	/**
-	 * @param state The state execute effects
-	 * @param EventQueue The queue that new events created by this method are added to
-	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);

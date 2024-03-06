@@ -16,10 +16,6 @@ public class StartEvent extends SupermarketEvent {
 		super(time); // Super den kallar på konstruktorn i överklassen
 	}
 
-	/**
-	 * @param state The state execute effects
-	 * @param eventQueue The queue that new events created by this method are added to
-	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue); // Kör execute från SupermarketEvent

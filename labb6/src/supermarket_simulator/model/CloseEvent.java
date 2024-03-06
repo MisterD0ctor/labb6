@@ -16,10 +16,6 @@ public class CloseEvent extends SupermarketEvent {
 		super(time);
 	}
 
-	/**
-	 * @param state The state execute effects
-	 * @param eventQueue The queue that new events created by this method are added to
-	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue); 
