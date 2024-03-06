@@ -9,7 +9,7 @@ import supermarket_simulator.customers.Customer;
  */
 public class PayEvent extends SupermarketEvent {
 
-	public final Customer customer;
+	private final Customer customer;
 
 	/**
 	 * @param time The time where this event is supposed to happen
@@ -44,6 +44,10 @@ public class PayEvent extends SupermarketEvent {
 			// Ett nytt betalningsevent skapas för den kund som stod först i kassakön
 			eventQueue.enqueue(new PayEvent(store.nextPayTime(), c));
 		}
+	}
+	
+	public Customer getCustomer() {
+		return this.customer;
 	}
 	
 }
