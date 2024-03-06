@@ -11,11 +11,19 @@ public class ArivalEvent extends SupermarketEvent {
 
 	public final Customer customer;
 
+	/**
+	 * @param time The time where this event is supposed to happen
+	 * @param customer The costumer that is arriving
+	 */
 	public ArivalEvent(double time, Customer customer) {
 		super(time);
 		this.customer = customer;
 	}
 
+	/**
+	 * @param state The state execute effects
+	 * @param EventQueue The queue that new events created by this method are added to
+	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue);

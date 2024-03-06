@@ -8,10 +8,17 @@ import generic_simulator.model.State;
  */
 public class CloseEvent extends SupermarketEvent {
 
+	/**
+	 * @param time The time where this event is supposed to happen
+	 */
 	public CloseEvent(double time) {
 		super(time);
 	}
 
+	/**
+	 * @param state The state execute effects
+	 * @param eventQueue The queue that new events created by this method are added to
+	 */
 	@Override
 	public void execute(State state, EventQueue eventQueue) {
 		super.execute(state, eventQueue); 
