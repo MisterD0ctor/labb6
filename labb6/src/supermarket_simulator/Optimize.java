@@ -15,6 +15,11 @@ public class Optimize {
 	
 	
 	private static final int MIN_CONSECUTIVE_STABLE_RUNS = 100;
+	/**
+	 * 
+	 * Prints the parameters and results
+	 * Different parameters test different methods which the test-program contains
+	 */
 
 	public static void main(String[] args) {
 		System.out.printf(
@@ -84,7 +89,7 @@ public class Optimize {
 		return state;
 	}
 	/**
-	 * 
+	 * Finds the smallest amount of checkouts for the biggest amount of customers
 	 * @param customerCapacity number of available checkouts
 	 * @param arivalFrequency maximal amounts of customers in the store 
 	 * @param minPickTime smallest pick time available
@@ -120,7 +125,7 @@ public class Optimize {
 		return checkouts;
 	}
 /**
- * 
+ * Finds the highest value that optimalCheckouts returns, with randomized seeds each time
  * @param customerCapacity number of available checkouts
  * @param arivalFrequency maximal amounts of customers in the store 
  * @param minPickTime smallest pick time available
