@@ -7,6 +7,10 @@ import generic_simulator.EventQueue;
  */
 public class StopEvent extends Event {
 
+	/**
+	 * Crates a stop event with a specified time
+	 * @param time The time where this event is supposed to happen
+	 */
 	public StopEvent(double time) {
 		super(time); // Kallar på konstruktorn till Event
 	}
